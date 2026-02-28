@@ -2,7 +2,37 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+@font-face {
+  font-family: 'Product Sans';
+  src: url('./assets/fonts/Product Sans Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Product Sans';
+  src: url('./assets/fonts/Product Sans Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Product Sans';
+  src: url('./assets/fonts/Product Sans Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Product Sans';
+  src: url('./assets/fonts/Product Sans Bold Italic.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
 
 @layer base {
   :root {
@@ -49,8 +79,8 @@
     --shadow-card: 0 4px 24px -4px hsl(340 75% 40% / 0.1);
     --shadow-elevated: 0 20px 60px -15px hsl(340 75% 40% / 0.15);
 
-    --font-display: 'Playfair Display', serif;
-    --font-body: 'DM Sans', sans-serif;
+    --font-display: 'Product Sans', sans-serif;
+    --font-body: 'Product Sans', sans-serif;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -96,6 +126,24 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+  }
+
+  .marquee-track {
+    @apply flex w-max items-center gap-14;
+    animation: marquee-scroll 28s linear infinite;
+  }
+
+  .marquee-item {
+    @apply flex h-20 min-w-[190px] items-center justify-center;
+  }
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
   }
 }
 

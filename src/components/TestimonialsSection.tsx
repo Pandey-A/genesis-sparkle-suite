@@ -1,70 +1,109 @@
 import { motion } from "framer-motion";
-import { Star, Quote } from "lucide-react";
+import { Award, ShieldCheck, FileCheck } from "lucide-react";
 
-const testimonials = [
-  {
-    name: "Harsh Rajput",
-    text: "Dr. Bhavna Sharma is such a great doctor. She is very clear on how she will proceed and does not confuse you. She is very straightforward and makes it very simple for you to understand the procedure.",
-  },
-  {
-    name: "Mamta Sikarwar",
-    text: "Very well mannered staff, good coordination with patients. Dr. Bhavna Sharma ma'am assisted very well and took good care of patients. Highly recommend!",
-  },
-  {
-    name: "Ruchi Rathour",
-    text: "Their IVF expertise, care and advanced treatment options provided us with a successful and fulfilling experience. We are forever grateful to the entire team.",
-  },
-  {
-    name: "Raju Singh",
-    text: "I had a pregnancy in the first attempt. The staff is very helpful — I have called them so many times, even in the night. I am very thankful to the entire team.",
-  },
+// Importing all certificates
+import cert1 from "@/assets/certificates/1-1-1024x768.webp";
+import cert2 from "@/assets/certificates/2-2-1024x768.webp";
+import cert3 from "@/assets/certificates/3-1-1024x768.webp";
+import cert4 from "@/assets/certificates/4-1-1024x768.webp";
+import cert5 from "@/assets/certificates/5-1-1024x768.webp";
+import cert6 from "@/assets/certificates/6-1-1024x768.webp";
+import cert7 from "@/assets/certificates/7-1024x768.webp";
+import cert8 from "@/assets/certificates/8-1024x768.webp";
+import cert9 from "@/assets/certificates/9-1024x768.webp";
+import cert10 from "@/assets/certificates/10-1024x768.webp";
+import cert11 from "@/assets/certificates/11-1024x768.webp";
+import cert12 from "@/assets/certificates/12-1024x768.webp";
+
+const certificates = [
+  { src: cert1, title: "Medical Accreditation" },
+  { src: cert2, title: "IVF Specialization" },
+  { src: cert3, title: "Clinical Excellence" },
+  { src: cert4, title: "International Standards" },
+  { src: cert5, title: "Laboratory Certification" },
+  { src: cert6, title: "Quality Assurance" },
+  { src: cert7, title: "Healthcare Compliance" },
+  { src: cert8, title: "Safety Protocol" },
+  { src: cert9, title: "Advanced Embryology" },
+  { src: cert10, title: "Professional Affiliation" },
+  { src: cert11, title: "Patient Care Award" },
+  { src: cert12, title: "Innovation in IVF" },
 ];
 
-const TestimonialsSection = () => {
+const CertificatesSection = () => {
   return (
-    <section id="testimonials" className="py-20 bg-secondary">
+    <section id="certificates" className="py-24 bg-secondary">
       <div className="container mx-auto px-4">
+        {/* Header Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-14"
+          className="text-center mb-16"
         >
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-3">
-            IVF Success Stories
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-bold mb-4">
+            <ShieldCheck size={18} />
+            Certified Excellence
+          </div>
+          <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-4">
+            Certifications & Affiliations
           </h2>
-          <p className="text-muted-foreground text-lg">Happy families created at Babygen IVF</p>
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            Our center adheres to the highest international standards of medical safety and ethical practices.
+          </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-          {testimonials.map((t, i) => (
+        {/* Certificates Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 lg:gap-8">
+          {certificates.map((cert, i) => (
             <motion.div
-              key={t.name}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              key={i}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="bg-background rounded-2xl p-6 shadow-card relative"
+              transition={{ duration: 0.4, delay: i * 0.05 }}
+              className="group"
             >
-              <Quote className="absolute top-4 right-4 h-8 w-8 text-accent" />
-              <div className="flex gap-1 mb-3">
-                {[...Array(5)].map((_, j) => (
-                  <Star key={j} className="h-4 w-4 fill-gold-warm text-gold-warm" />
-                ))}
-              </div>
-              <p className="text-foreground/80 text-sm leading-relaxed mb-4">"{t.text}"</p>
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full gradient-hero flex items-center justify-center text-primary-foreground font-bold text-sm">
-                  {t.name.charAt(0)}
+              <div className="relative aspect-[4/3] bg-background rounded-2xl overflow-hidden shadow-card hover:shadow-elevated transition-all duration-500 border border-border/50">
+                {/* Certificate Image */}
+                <img
+                  src={cert.src}
+                  alt={cert.title}
+                  className="w-full h-full object-contain p-4 group-hover:scale-110 transition-transform duration-500"
+                />
+                
+                {/* Hover Overlay */}
+                <div className="absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-6 text-center">
+                  <FileCheck className="text-white mb-3" size={32} />
+                  <p className="text-white font-bold text-sm uppercase tracking-wider">
+                    {cert.title}
+                  </p>
                 </div>
-                <span className="font-semibold text-foreground text-sm">{t.name}</span>
               </div>
             </motion.div>
           ))}
         </div>
+
+        {/* Trust Badges Footer */}
+        <motion.div 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          className="mt-20 flex flex-wrap justify-center items-center gap-12 grayscale opacity-60"
+        >
+           {/* Add any specific small logos here if needed */}
+           <div className="flex items-center gap-2 font-display font-bold text-xl">
+             <Award className="text-primary" /> ICMR ENROLLED
+           </div>
+           <div className="flex items-center gap-2 font-display font-bold text-xl">
+             <ShieldCheck className="text-primary" /> ISO CERTIFIED
+           </div>
+           <div className="flex items-center gap-2 font-display font-bold text-xl">
+             <FileCheck className="text-primary" /> ISAR AFFILIATED
+           </div>
+        </motion.div>
       </div>
     </section>
   );
 };
 
-export default TestimonialsSection;
+export default CertificatesSection;

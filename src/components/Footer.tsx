@@ -1,4 +1,5 @@
 import { Phone, Mail, MapPin } from "lucide-react";
+import babygenLogo from "@/assets/Babygen-Logo.webp";
 
 const Footer = () => {
   return (
@@ -7,9 +8,11 @@ const Footer = () => {
         <div className="grid md:grid-cols-3 gap-10 mb-12">
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <div className="h-10 w-10 rounded-full gradient-hero flex items-center justify-center text-primary-foreground font-display font-bold text-lg">
-                B
-              </div>
+              <img
+                src={babygenLogo}
+                alt="Babygen IVF"
+                className="h-10 w-auto object-contain"
+              />
               <div>
                 <span className="font-display font-bold text-xl text-primary-foreground">Babygen</span>
                 <span className="font-display font-bold text-xl text-rose-glow"> IVF</span>

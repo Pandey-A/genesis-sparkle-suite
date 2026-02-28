@@ -60,6 +60,16 @@ This project is built with:
 - shadcn-ui
 - Tailwind CSS
 
+## Cloudinary setup
+
+Cloudinary is now integrated with a reusable image helper.
+
+1. Copy [.env.example](.env.example) to `.env`.
+2. Add your Cloudinary cloud name to `VITE_CLOUDINARY_CLOUD_NAME`.
+3. Add `VITE_CLOUDINARY_HERO_PUBLIC_ID` with the Hero image public ID (for example: `babygen/hero-mother-baby`).
+
+If Cloudinary env vars are missing, the app automatically falls back to local images.
+
 ## How can I deploy this project?
 
 Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
