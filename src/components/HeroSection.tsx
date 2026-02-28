@@ -101,17 +101,17 @@ const Hero: FC = () => {
           {/* LEFT CONTENT: TEXT & MIDDLE IMAGE */}
           <div className="lg:col-span-8 flex flex-col md:flex-row items-end gap-0">
             <div className="md:w-3/5 space-y-6 pb-16 md:pb-28">
-              <h1 className="text-[40px] md:text-[54px] lg:text-[64px] font-black text-[#9B2B4E] leading-[1.1]">
+              <h1 className="text-[40px] md:text-[42px] lg:text-[54px] font-black text-[#9B2B4E] leading-[1.1]">
                 {t("hero.title")}
               </h1>
-              <p className="text-[#1A1A1A] text-2xl md:text-3xl font-bold leading-tight">
+              <p className="text-[#1A1A1A] text-2xl md:text-2xl font-bold leading-tight">
                 {t("hero.subtitle")}
               </p>
               
               {/* Promo Badge */}
               <div className="inline-block border-2 border-[#9B2B4E] rounded-xl overflow-hidden shadow-lg bg-white">
                 <div className="bg-[#9B2B4E] h-4 w-full"></div>
-                <div className="px-6 py-3 text-[#9B2B4E] font-black text-lg md:text-xl uppercase">
+                <div className="px-6 py-3 text-[#9B2B4E] font-black text-md md:text-xl uppercase">
                   {t("hero.badge")}
                 </div>
               </div>
@@ -130,16 +130,16 @@ const Hero: FC = () => {
           </div>
 
           {/* RIGHT CONTENT: THE FORM */}
-          <div className="lg:col-span-4 w-[450px]py-10">
-            <div className="bg-white p-8 md:p-12 rounded-[2.5rem] shadow-[0_30px_60px_-15px_rgba(0,0,0,0.2)] border border-white">
-              <h2 className="text-[#9B2B4E] font-black text-center text-3xl md:text-3xl mb-8 leading-tight uppercase">
+          <div className="lg:col-span-4 w-full py-10">
+            <div className="bg-white p-8 md:p-10 rounded-[2.5rem] shadow-[0_30px_60px_-15px_rgba(0,0,0,0.2)] border border-white">
+              <h2 className="text-[#9B2B4E] font-black text-2xl md:text-3xl mb-8 leading-tight uppercase">
                 {t("hero.bookAppointment")}
               </h2>
               
               <form ref={formRef} onSubmit={sendEmail} className="space-y-4">
                 <select 
                   name="service_type"
-                  className="w-full p-5 border border-gray-200 rounded-xl bg-gray-50 text-gray-600 font-bold focus:ring-2 focus:ring-[#9B2B4E]/20 outline-none appearance-none"
+                  className="w-full p-4 border border-gray-200 rounded-xl bg-gray-50 text-gray-600 font-bold focus:ring-2 focus:ring-[#9B2B4E]/20 outline-none appearance-none"
                   required
                 >
                   <option value="">{t("hero.selectService")}</option>
@@ -152,7 +152,7 @@ const Hero: FC = () => {
                   type="text" 
                   name="from_name"
                   placeholder={t("hero.input.name")} 
-                  className="w-full p-5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#9B2B4E]/20 outline-none font-bold"
+                  className="w-full p-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#9B2B4E]/20 outline-none font-bold"
                   required 
                 />
 
@@ -160,14 +160,14 @@ const Hero: FC = () => {
                   type="email" 
                   name="from_email"
                   placeholder={t("hero.input.email")} 
-                  className="w-full p-5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#9B2B4E]/20 outline-none font-bold"
+                  className="w-full p-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#9B2B4E]/20 outline-none font-bold"
                 />
 
                 <input 
                   type="tel" 
                   name="from_phone"
                   placeholder={t("hero.input.phone")} 
-                  className="w-full p-5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#9B2B4E]/20 outline-none font-bold" 
+                  className="w-full p-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#9B2B4E]/20 outline-none font-bold" 
                   required 
                 />
 

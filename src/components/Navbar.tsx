@@ -35,7 +35,7 @@ const Navbar: React.FC = () => {
           <div className="bg-white p-2 rounded-full text-[#D15B8F]">
             <Phone size={18} className="md:w-5 md:h-5" fill="currentColor" />
           </div>
-          <a href="tel:07314855000" className="text-lg md:text-md font-bold tracking-wide">
+          <a href="tel:07314855000" className="text-md md:text-sm font-bold tracking-wide">
             7314855000
           </a>
         </div>
@@ -49,7 +49,7 @@ const Navbar: React.FC = () => {
         </div>
         <a href="mailto:babygenivf@gmail.com" className="hidden lg:flex items-center gap-2 text-sm md:text-[15px] font-bold hover:opacity-80 transition">
           <Mail size={32} />
-          <span className='text-lg md:text-xl'>babygenivf@gmail.com</span>
+          <span className='text-sm md:text-md'>babygenivf@gmail.com</span>
         </a>
 
         {/* Right Side: Address, Appointment & Language */}
@@ -59,11 +59,11 @@ const Navbar: React.FC = () => {
               <MapPin size={28} className="text-[#D15B8F]" fill="none" strokeWidth={2.5} />
             </div>
             <div className="flex flex-col">
-              <span className="text-sm md:text-[16px] font-bold leading-tight">{t("header.address.line1")}</span>
-              <span className="text-xs md:text-[13px] text-white/80">{t("header.address.line2")}</span>
+              <span className="text-sm md:text-[12px] font-bold leading-tight">{t("header.address.line1")}</span>
+              <span className="text-xs md:text-[9px] text-white/80">{t("header.address.line2")}</span>
             </div>
           </div>
-          <a href="#" className="text-sm md:text-lg font-bold hover:opacity-80 transition hidden sm:block">
+          <a href="#" className="text-sm md:text-md font-bold hover:opacity-80 transition hidden sm:block">
             {t("header.bookAppointment")}
           </a>
           
@@ -97,8 +97,8 @@ const Navbar: React.FC = () => {
             />
             <div className="flex flex-col">
               <div className="flex flex-col">
-                <span className="text-md md:text-lg font-bold">{t("header.hospitalName")}</span>
-                <span className="text-xs md:text-sm text-[#D15B8F] font-semibold">{t("header.location")} | {t("header.location2")}</span>
+                <span className="text-md md:text-md font-bold">{t("header.hospitalName")}</span>
+                <span className="text-xs md:text-xs text-[#D15B8F] font-semibold">{t("header.location")} | {t("header.location2")}</span>
               </div>
               {/* <p className="sm:text-xs md:text- text-gray-600">Hospital</p> */}
             </div>
@@ -110,7 +110,7 @@ const Navbar: React.FC = () => {
               <li key={link.key} className="relative group">
                 <a 
                   href={link.href} 
-                  className={`flex items-center gap-1 text-md lg:text-xl font-bold transition duration-300 ${
+                  className={`flex items-center gap-1 text-md lg:text-md font-bold transition duration-300 ${
                     link.active ? 'text-[#D15B8F]' : 'text-gray-800 hover:text-[#D15B8F]'
                   }`}
                 >
