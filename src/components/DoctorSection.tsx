@@ -1,10 +1,13 @@
 import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
+import { Award, Globe2, Microscope } from "lucide-react";
 import { buildCloudinaryVideoUrl } from "@/lib/cloudinary";
+import { useLanguage } from "@/context/LanguageContext";
 
 const doctorVideoUrl = buildCloudinaryVideoUrl("English_pitch_video_babygen_1_ckleoh");
 
 const DoctorSection = () => {
+  const { t } = useLanguage();
   const sectionRef = useRef<HTMLElement | null>(null);
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
@@ -72,8 +75,17 @@ const DoctorSection = () => {
   }, []);
 
   return (
-    <section id="about" ref={sectionRef} className="py-20 bg-background">
+    <section id="about" ref={sectionRef} className="py-14 md:py-20 bg-background">
       <div className="container mx-auto px-4">
+        <div className="lg:hidden text-center mb-6">
+          <p className="inline-flex rounded-full bg-primary/10 text-primary px-4 py-1.5 text-xs font-semibold mb-3">
+            IVF Expert Message
+          </p>
+          <h2 className="font-display text-2xl font-bold text-foreground leading-tight">
+            {t("doctor.heading.prefix")} <span className="text-gradient">{t("doctor.heading.name")}</span>
+          </h2>
+        </div>
+
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -82,7 +94,7 @@ const DoctorSection = () => {
             transition={{ duration: 0.7 }}
             className="relative"
           >
-            <div className="relative rounded-2xl overflow-hidden shadow-elevated max-w-sm mx-auto lg:mx-0">
+            <div className="relative rounded-3xl overflow-hidden shadow-elevated max-w-sm mx-auto lg:mx-0 border border-border/60 bg-card">
               <video
                 ref={videoRef}
                 src={doctorVideoUrl}
@@ -91,13 +103,28 @@ const DoctorSection = () => {
                 playsInline
                 preload="metadata"
               />
-              <div className="pointer-events-none absolute bottom-0 left-0 right-0 gradient-hero p-4">
-                <h3 className="font-display text-xl font-bold text-primary-foreground">
-                  Dr. Bhavna Sharma
+              <div className="pointer-events-none absolute bottom-0 left-0 right-0 gradient-hero p-4 md:p-5">
+                <h3 className="font-display text-xl md:text-2xl font-bold text-primary-foreground">
+                  {t("doctor.name")}
                 </h3>
-                <p className="text-primary-foreground/80 text-sm">
-                  MBBS, DGO | IVF & Infertility Specialist
+                <p className="text-primary-foreground/85 text-xs md:text-sm">
+                  {t("doctor.position")}
                 </p>
+              </div>
+            </div>
+
+            <div className="mt-4 grid grid-cols-3 gap-2 md:gap-3 max-w-sm mx-auto lg:mx-0">
+              <div className="rounded-xl border border-border bg-card px-2 py-2 md:px-3 md:py-2.5 text-center">
+                <p className="text-base md:text-lg font-extrabold text-foreground">20+</p>
+                <p className="text-[10px] md:text-xs text-muted-foreground font-semibold">Years</p>
+              </div>
+              <div className="rounded-xl border border-border bg-card px-2 py-2 md:px-3 md:py-2.5 text-center">
+                <p className="text-base md:text-lg font-extrabold text-foreground">10K+</p>
+                <p className="text-[10px] md:text-xs text-muted-foreground font-semibold">IVF/ICSI</p>
+              </div>
+              <div className="rounded-xl border border-border bg-card px-2 py-2 md:px-3 md:py-2.5 text-center">
+                <p className="text-base md:text-lg font-extrabold text-foreground">8K+</p>
+                <p className="text-[10px] md:text-xs text-muted-foreground font-semibold">Successes</p>
               </div>
             </div>
           </motion.div>
@@ -107,44 +134,61 @@ const DoctorSection = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
+            className="lg:pr-4"
           >
-            {/* <div className="w-1 h-12 gradient-hero rounded-full mb-4" /> */}
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">
-              A Message from <span className="text-gradient">Dr. Bhavna Sharma</span>
-            </h2>
-            <p className="text-muted-foreground italic mb-6">
-              IVF Specialist, Babygen IVF Centre, Pune
+            <p className="hidden lg:inline-flex rounded-full bg-primary/10 text-primary px-4 py-1.5 text-xs md:text-sm font-semibold mb-4">
+              IVF Expert Message
             </p>
-            <div className="space-y-4 text-foreground/80 leading-relaxed">
+
+            <h2 className="hidden lg:block font-display text-3xl md:text-4xl font-bold text-foreground mb-4 leading-tight">
+              {t("doctor.heading.prefix")} <span className="text-gradient">{t("doctor.heading.name")}</span>
+            </h2>
+            <p className="text-muted-foreground italic mb-5 md:mb-6">
+              {t("doctor.subtitle")}
+            </p>
+
+            <div className="grid sm:grid-cols-3 gap-2 md:gap-3 mb-6">
+              <div className="inline-flex items-center gap-2 rounded-xl border border-border bg-card px-3 py-2 text-xs md:text-sm font-semibold text-foreground">
+                <Award className="h-4 w-4 text-primary" />
+                20+ Years
+              </div>
+              <div className="inline-flex items-center gap-2 rounded-xl border border-border bg-card px-3 py-2 text-xs md:text-sm font-semibold text-foreground">
+                <Microscope className="h-4 w-4 text-primary" />
+                IVF + ICSI
+              </div>
+              <div className="inline-flex items-center gap-2 rounded-xl border border-border bg-card px-3 py-2 text-xs md:text-sm font-semibold text-foreground">
+                <Globe2 className="h-4 w-4 text-primary" />
+                Global Training
+              </div>
+            </div>
+
+            <div className="space-y-4 text-foreground/80 leading-relaxed text-sm md:text-base">
               <p>
-                At the heart of Babygen IVF lies a passionate vision brought to life by Dr. Bhavna Sharma, 
-                a dexterous and dedicated IVF specialist with more than 20 years of experience. Her journey 
-                began at the prestigious Maulana Azad Medical College (MAMC), Delhi University, where she 
-                completed her MBBS and DGO.
+                {t("doctor.p1.start")} <strong className="text-foreground">{t("doctor.p1.h1")}</strong>{" "}
+                {t("doctor.p1.mid1")} <strong className="text-foreground">{t("doctor.p1.h2")}</strong>{" "}
+                {t("doctor.p1.mid2")} <strong className="text-foreground">{t("doctor.p1.h3")}</strong>.
               </p>
               <p>
-                Her pursuit of excellence took her to Europe for advanced learning, including refined 
-                training at Landes-Frauen-Und Kinderklinik, Linz, a Masters course in Assisted Reproductive 
-                Technology (ART), and a Diploma in Pelvic Endoscopy from Kiel University, Germany.
+                {t("doctor.p2.start")} <strong className="text-foreground">{t("doctor.p2.h1")}</strong>{" "}
+                {t("doctor.p2.mid1")} <strong className="text-foreground">{t("doctor.p2.h2")}</strong>{" "}
+                {t("doctor.p2.mid2")} <strong className="text-foreground">{t("doctor.p2.h3")}</strong>.
               </p>
               <p>
-                With rich international exposure, Dr. Sharma pioneered Kalyan IVF Centre in Gwalior, 
-                bringing hope to couples dreaming of parenthood. She has performed over 10,000 IVF and 
-                ICSI procedures, resulting in more than 8,000 successful IVF pregnancies, blending science 
-                with compassionate care.
+                {t("doctor.p3.start")} <strong className="text-foreground">{t("doctor.p3.h1")}</strong>{" "}
+                {t("doctor.p3.mid1")} <strong className="text-foreground">{t("doctor.p3.h2")}</strong>{" "}
+                {t("doctor.p3.mid2")} <strong className="text-foreground">{t("doctor.p3.h3")}</strong>{" "}
+                {t("doctor.p3.end")}
               </p>
               <p>
-                Babygen IVF opens a new chapter as Dr. Sharma extends her expertise to Pune and Gurugram, 
-                with centres equipped with cutting-edge embryology labs, advanced diagnostics, and the latest 
-                innovations in IVF, ICSI, egg freezing, and fertility preservation — ensuring personalized care 
-                and excellent outcomes for aspiring parents.
+                {t("doctor.p4.start")} <strong className="text-foreground">{t("doctor.p4.h1")}</strong>{" "}
+                {t("doctor.p4.mid1")} <strong className="text-foreground">{t("doctor.p4.h2")}</strong>, {t("doctor.p4.end")}
               </p>
             </div>
             <a
               href="#contact"
               className="inline-flex mt-8 gradient-hero text-primary-foreground px-8 py-3 rounded-full font-semibold hover:opacity-90 transition-opacity"
             >
-              Book an Appointment
+              {t("doctor.cta")}
             </a>
           </motion.div>
         </div>

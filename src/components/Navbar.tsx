@@ -65,14 +65,14 @@ const Navbar: React.FC = () => {
 
           {/* Phone Number Pill Component */}
           {/* <a 
-            href="tel:8938935353" 
+            href="tel:7314855000" 
             className="flex items-center gap-3 bg-white border border-gray-200 shadow-sm rounded-full pl-1 pr-6 py-1 hover:shadow-md transition-all group"
           >
             <div className="bg-[#8E568F] p-2 rounded-full text-white group-hover:bg-[#D15B8F] transition-colors">
               <Phone size={18} fill="currentColor" />
             </div>
             <span className="text-[#8E568F] group-hover:text-[#D15B8F] font-bold text-lg tracking-tight">
-              893 893 5353
+              731 485 5000
             </span>
           </a> */}
         </div>
@@ -131,8 +131,8 @@ const Navbar: React.FC = () => {
               ))}
             </ul>
             <div className="mt-auto flex flex-col gap-4">
-              <a href="tel:8938935353" className="flex items-center justify-center gap-3 py-3 border-2 border-[#8E568F] rounded-full text-[#8E568F] font-bold">
-                <Phone size={18} fill="currentColor" /> 893 893 5353
+              <a href="tel:7314855000" className="flex items-center justify-center gap-3 py-3 border-2 border-[#8E568F] rounded-full text-[#8E568F] font-bold">
+                <Phone size={18} fill="currentColor" /> 731 485 5000
               </a>
               <a href="#" className="bg-[#D15B8F] text-white text-center py-4 rounded-md font-bold">
                 Book Appointment

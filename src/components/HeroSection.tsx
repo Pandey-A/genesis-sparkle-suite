@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { 
   Phone, 
   PhoneCall, 
@@ -10,14 +10,58 @@ import {
 } from 'lucide-react';
 import logo from '@/assets/Babygen-Logo.webp';
 import { useLanguage } from '@/context/LanguageContext';
+import { useNavigate } from 'react-router-dom';
 
 // Background image - ensure this path is correct in your project
 import reception from "@/assets/hospital/babygen-ivf-reception.webp";
+
+type AnimatedCountProps = {
+  end: number;
+  suffix?: string;
+  duration?: number;
+  className?: string;
+};
+
+const AnimatedCount: React.FC<AnimatedCountProps> = ({
+  end,
+  suffix = '',
+  duration = 1200,
+  className,
+}) => {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    let animationFrameId = 0;
+    const startTime = performance.now();
+
+    const updateCount = (currentTime: number) => {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      setCount(Math.floor(progress * end));
+
+      if (progress < 1) {
+        animationFrameId = requestAnimationFrame(updateCount);
+      }
+    };
+
+    animationFrameId = requestAnimationFrame(updateCount);
+
+    return () => cancelAnimationFrame(animationFrameId);
+  }, [duration, end]);
+
+  return <span className={className}>{count}{suffix}</span>;
+};
 
 const LandingPage: React.FC = () => {
   const { language, setLanguage, t } = useLanguage();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
+  const navigate = useNavigate();
+
+  const handleHeroFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    navigate('/thank-you');
+  };
 
   const navLinks = [
     { label: "Our Services", href: "#" },
@@ -64,9 +108,15 @@ const LandingPage: React.FC = () => {
                 IVF and ICSI, guided by experienced specialists who care.
               </p>
 
+              <div className="inline-flex items-center rounded-full bg-[#D97017]/10 border border-[#D97017]/30 px-4 py-2">
+                <span className="text-sm md:text-base font-bold text-[#D97017]">
+                  Save upto Rs. 40000. Only 3 slots left!!
+                </span>
+              </div>
+
               <div className="flex flex-wrap gap-4">
                 <a 
-                  href="tel:8938935353"
+                  href="tel:7314855000"
                   className="flex items-center gap-3 px-8 py-4 bg-white border-2 border-[#0054A6] text-[#0054A6] rounded-xl font-bold text-lg hover:bg-blue-50 transition-all shadow-sm"
                 >
                   <PhoneCall size={22} />
@@ -89,14 +139,33 @@ const LandingPage: React.FC = () => {
                 <h2 className="text-gray-800 font-bold text-xl mb-6">
                   Get Personalized Consultation!
                 </h2>
+
+                <p className="text-sm font-bold text-[#D97017] mb-4">
+                  Save upto Rs. 40000. Only 3 slots left!!
+                </p>
                 
-                <form ref={formRef} className="space-y-4">
+                <form ref={formRef} onSubmit={handleHeroFormSubmit} className="space-y-4">
+                  <div className="relative">
+                    <select
+                      defaultValue=""
+                      className="w-full px-4 py-4 border border-gray-200 rounded-xl outline-none focus:ring-2 focus:ring-blue-100 appearance-none bg-white text-gray-700"
+                      required
+                    >
+                      <option value="" disabled>Select Service</option>
+                      <option value="ivf">IVF Treatment</option>
+                      <option value="consultation">General Consultation</option>
+                      <option value="gynaecology">Gynaecologist</option>
+                    </select>
+                    <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" size={18} />
+                  </div>
+
                   <div className="relative">
                     <User className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
                     <input 
                       type="text" 
                       placeholder="Enter Name" 
                       className="w-full pl-12 pr-4 py-4 border border-gray-200 rounded-xl outline-none focus:ring-2 focus:ring-blue-100"
+                      required
                     />
                   </div>
 
@@ -109,9 +178,16 @@ const LandingPage: React.FC = () => {
                     <input 
                       type="tel" 
                       placeholder="Enter Phone Number" 
-                      className="w-full px-4 py-4 border border-gray-200 rounded-r-xl outline-none focus:ring-2 focus:ring-blue-100" 
+                      className="w-full px-4 py-4 border border-gray-200 rounded-r-xl outline-none focus:ring-2 focus:ring-blue-100"
+                      required
                     />
                   </div>
+
+                  <input
+                    type="email"
+                    placeholder="Enter Email Address (Optional)"
+                    className="w-full px-4 py-4 border border-gray-200 rounded-xl outline-none focus:ring-2 focus:ring-blue-100"
+                  />
 
                   <button 
                     type="submit"
@@ -142,19 +218,19 @@ const LandingPage: React.FC = () => {
 
           {/* --- STATS BAR: Aligned on the bottom line --- */}
           {/* translate-y-1/2 puts the bar exactly in the middle of the bottom edge */}
-          <div className="absolute left-6 right-6 bottom-0 translate-y-1/2 z-20 max-w-[1200px] mx-auto">
-            <div className="bg-white rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.1)] border border-gray-50 p-6 md:p-10 grid grid-cols-1 md:grid-cols-3 gap-6 items-center divide-y md:divide-y-0 md:divide-x divide-gray-100">
-              <div className="flex items-center justify-center gap-3">
-                <span className="text-3xl font-black text-gray-900">50+</span>
-                <span className="text-lg font-bold text-[#8E568F]">Doctors Panel</span>
+          <div className="absolute left-3 right-3 md:left-6 md:right-6 bottom-0 translate-y-1/2 z-20 max-w-[1200px] mx-auto">
+            <div className="bg-white rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.1)] border border-gray-50 p-3 md:p-10 grid grid-cols-3 gap-2 md:gap-6 items-center divide-x divide-gray-100">
+              <div className="flex flex-col md:flex-row items-center justify-center gap-0 md:gap-3 px-1 md:px-0 text-center md:text-left">
+                <AnimatedCount end={1000} suffix="+" className="text-xl md:text-2xl font-black text-gray-900" />
+                <span className="text-xs md:text-lg font-bold text-[#8E568F] leading-tight">IVF Babies Born</span>
               </div>
-              <div className="flex items-center justify-center gap-3 py-4 md:py-0">
-                <span className="text-3xl font-black text-gray-900">6+</span>
-                <span className="text-lg font-bold text-[#8E568F]">Cities in India</span>
+              <div className="flex flex-col md:flex-row items-center justify-center gap-0 md:gap-3 px-1 md:px-0 text-center md:text-left">
+                <AnimatedCount end={3} suffix="+" className="text-xl md:text-2xl font-black text-gray-900" />
+                <span className="text-xs md:text-lg font-bold text-[#8E568F] leading-tight">Cities in India</span>
               </div>
-              <div className="flex items-center justify-center gap-3 pt-4 md:pt-0">
-                <span className="text-3xl font-black text-gray-900">20+ Years</span>
-                <span className="text-lg font-bold text-[#8E568F]">Experienced Doctors</span>
+              <div className="flex flex-col md:flex-row items-center justify-center gap-0 md:gap-3 px-1 md:px-0 text-center md:text-left">
+                <AnimatedCount end={20} suffix="+" className="text-xl md:text-2xl font-black text-gray-900 leading-tight" />
+                <span className="text-xs md:text-lg font-bold text-[#8E568F] leading-tight"> Years Of Experienced Doctors</span>
               </div>
             </div>
           </div>

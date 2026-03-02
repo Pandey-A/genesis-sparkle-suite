@@ -1,20 +1,21 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const ContactSection = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     service: "",
     name: "",
     email: "",
     phone: "",
-    message: "",
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert("Thank you! We will get back to you shortly.");
-    setFormData({ service: "", name: "", email: "", phone: "", message: "" });
+    setFormData({ service: "", name: "", email: "", phone: "" });
+    navigate("/thank-you");
   };
 
   return (
@@ -32,7 +33,7 @@ const ContactSection = () => {
           <p className="text-muted-foreground text-lg">Request a consultation today</p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-12 max-w-5xl mx-auto items-start">
           {/* Form */}
           <motion.form
             onSubmit={handleSubmit}
@@ -49,7 +50,6 @@ const ContactSection = () => {
             >
               <option value="">Select Service</option>
               <option value="ivf">IVF Treatment</option>
-              <option value="icsi">ICSI Treatment</option>
               <option value="consultation">General Consultation</option>
               <option value="gynaecology">Gynaecologist</option>
             </select>
@@ -76,13 +76,6 @@ const ContactSection = () => {
               className="w-full px-4 py-3 rounded-xl border border-input bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-ring"
               required
             />
-            <textarea
-              placeholder="Message / Requirements"
-              rows={4}
-              value={formData.message}
-              onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-              className="w-full px-4 py-3 rounded-xl border border-input bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-ring resize-none"
-            />
             <button
               type="submit"
               className="w-full gradient-hero text-primary-foreground py-3.5 rounded-xl font-semibold text-base hover:opacity-90 transition-opacity"
@@ -100,7 +93,7 @@ const ContactSection = () => {
           >
             <div className="bg-accent/50 rounded-2xl p-6 space-y-5">
               {[
-                { icon: Phone, label: "Phone", value: "0731 485 5000 / 9270 933 119", href: "tel:07314855000" },
+                { icon: Phone, label: "Phone", value: "731 485 5000", href: "tel:7314855000" },
                 { icon: Mail, label: "Email", value: "babygenivf@gmail.com", href: "mailto:babygenivf@gmail.com" },
                 { icon: MapPin, label: "Address", value: "2nd Floor, Kumar Prism, Amanora Park Town, Hadapsar, Pune" },
                 { icon: Clock, label: "Hours", value: "Mon – Sat: 9:00 AM – 7:00 PM" },
@@ -122,24 +115,31 @@ const ContactSection = () => {
                 </div>
               ))}
             </div>
-
-            {/* CTA banner */}
-            <div className="gradient-hero rounded-2xl p-6 text-center">
-              <p className="text-primary-foreground font-display text-xl font-bold mb-2">
-                Rs. 40,000 Discount on IVF*
-              </p>
-              <p className="text-primary-foreground/80 text-sm mb-4">Only 3 slots left! Book now.</p>
-              <a
-                href="https://wa.me/919270933119?text=Hello,%20I%20would%20like%20to%20book%20an%20appointment"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex bg-background text-primary font-semibold px-6 py-2.5 rounded-full text-sm hover:bg-accent transition-colors"
-              >
-                Chat on WhatsApp
-              </a>
-            </div>
           </motion.div>
         </div>
+
+        {/* CTA banner */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-3xl mx-auto mt-8"
+        >
+          <div className="gradient-hero rounded-2xl p-6 text-center">
+            <p className="text-primary-foreground font-display text-xl font-bold mb-2">
+              Save upto Rs. 40000
+            </p>
+            <p className="text-primary-foreground/80 text-sm mb-4">Only 3 slots left!!</p>
+            <a
+              href="https://wa.me/917314855000?text=Hello,%20I%20would%20like%20to%20book%20an%20appointment"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex bg-background text-primary font-semibold px-6 py-2.5 rounded-full text-sm hover:bg-accent transition-colors"
+            >
+              Chat on WhatsApp
+            </a>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

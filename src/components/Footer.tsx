@@ -1,7 +1,28 @@
-import { Phone, Mail, MapPin } from "lucide-react";
+import { Phone, Mail, MapPin, Facebook, Instagram, Youtube } from "lucide-react";
 import babygenLogo from "@/assets/Babygen-Logo.webp";
 
 const Footer = () => {
+  const socials = [
+    {
+      label: "Facebook",
+      href: "https://www.facebook.com/babygenivf",
+      icon: Facebook,
+      className: "bg-[#1877F2] text-white hover:opacity-90",
+    },
+    {
+      label: "Instagram",
+      href: "https://www.instagram.com/babygenivf/",
+      icon: Instagram,
+      className: "bg-gradient-to-br from-[#833AB4] via-[#E1306C] to-[#F77737] text-white hover:opacity-90",
+    },
+    {
+      label: "YouTube",
+      href: "https://www.youtube.com/@drbhavnasharmaivf",
+      icon: Youtube,
+      className: "bg-[#FF0000] text-white hover:opacity-90",
+    },
+  ];
+
   return (
     <footer className="bg-foreground text-primary-foreground/80 pt-16 pb-6">
       <div className="container mx-auto px-4">
@@ -27,11 +48,8 @@ const Footer = () => {
           <div>
             <h4 className="font-display text-lg font-bold text-primary-foreground mb-4">Contact Us</h4>
             <div className="space-y-3 text-sm">
-              <a href="tel:07314855000" className="flex items-center gap-2 hover:text-primary-foreground transition-colors">
-                <Phone className="h-4 w-4" /> 0731 485 5000
-              </a>
-              <a href="tel:9270933119" className="flex items-center gap-2 hover:text-primary-foreground transition-colors">
-                <Phone className="h-4 w-4" /> 9270 933 119
+              <a href="tel:7314855000" className="flex items-center gap-2 hover:text-primary-foreground transition-colors">
+                <Phone className="h-4 w-4" /> 731 485 5000
               </a>
               <a href="mailto:babygenivf@gmail.com" className="flex items-center gap-2 hover:text-primary-foreground transition-colors">
                 <Mail className="h-4 w-4" /> babygenivf@gmail.com
@@ -53,15 +71,22 @@ const Footer = () => {
               ))}
             </div>
             <div className="flex gap-3 mt-6">
-              {["Facebook", "Instagram", "YouTube"].map((social) => (
+              {socials.map((social) => {
+                const Icon = social.icon;
+
+                return (
                 <a
-                  key={social}
-                  href="#"
-                  className="w-9 h-9 rounded-full bg-primary-foreground/10 flex items-center justify-center text-xs font-bold hover:bg-primary-foreground/20 transition-colors"
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.label}
+                  className={`w-9 h-9 rounded-full flex items-center justify-center transition-all ${social.className}`}
                 >
-                  {social.charAt(0)}
+                  <Icon className="h-4 w-4" />
                 </a>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>

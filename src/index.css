@@ -129,12 +129,12 @@
   }
 
   .marquee-track {
-    @apply flex w-max items-center gap-14;
+    @apply flex w-max items-center gap-4 md:gap-10;
     animation: marquee-scroll 28s linear infinite;
   }
 
   .marquee-item {
-    @apply flex h-20 min-w-[190px] items-center justify-center;
+    @apply flex h-20 min-w-[130px] md:min-w-[190px] items-center justify-center;
   }
 }
 

@@ -1,35 +1,37 @@
 import { useRef } from "react";
-import { Heart, Send, ChevronLeft, ChevronRight } from "lucide-react";
+import { Heart, Send, ChevronLeft, ChevronRight, Play } from "lucide-react";
 import { buildCloudinaryVideoUrl } from "@/lib/cloudinary";
 
 const videoItems = [
-  { id: "Testimonial-3_ri72v3", views: "15.4K Views" },
-  { id: "Testimonial-6_dyfjjr", views: "7.4K Views" },
-  { id: "Testimonial-2_e3asbp", views: "5.3K Views" },
-  { id: "Testimonial-1_ffq4ou", views: "27.5K Views" },
-  { id: "Testimonial-5_qalsln", views: "13.6K Views" },
+  { id: "Testimonial-3_ri72v3", views: "15.4K Views", title: "After 8 Years of Hope", treatment: "IVF + ICSI" },
+  { id: "Testimonial-6_dyfjjr", views: "7.4K Views", title: "Our First Positive Result", treatment: "IVF" },
+  { id: "Testimonial-2_e3asbp", views: "5.3K Views", title: "Trusted Team, Better Journey", treatment: "Consultation + IVF" },
+  { id: "Testimonial-1_ffq4ou", views: "27.5K Views", title: "From Doubt to Parenthood", treatment: "IVF + Embryo Transfer" },
+  { id: "Testimonial-5_qalsln", views: "13.6K Views", title: "High-Risk Case, Happy Ending", treatment: "Advanced Fertility Care" },
 ];
 
 const VideoTestimonialsSection = () => {
-  const scrollRef = useRef(null);
+  const scrollRef = useRef<HTMLDivElement | null>(null);
 
-  const scrollByAmount = (direction) => {
+  const scrollByAmount = (direction: "left" | "right") => {
     if (!scrollRef.current) return;
 
-    // Increased scroll amount to match the wider landscape cards
-    const amount = direction === "left" ? -500 : 500;
+    const amount = direction === "left" ? -420 : 420;
     scrollRef.current.scrollBy({ left: amount, behavior: "smooth" });
   };
 
   return (
-    <section className="py-12 bg-secondary/40">
+    <section className="py-14 md:py-20 bg-secondary/40" id="ivf-stories">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-8">
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-2">
+        <div className="text-center mb-8 md:mb-10">
+          <p className="inline-flex rounded-full bg-primary/10 text-primary px-4 py-1.5 text-xs md:text-sm font-semibold mb-4">
+            Real Patient Journeys
+          </p>
+          <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-2 md:mb-3">
             IVF Success Stories
           </h2>
-          <p className="text-muted-foreground text-lg">
-            Happy families created at Babygen IVF
+          <p className="text-muted-foreground text-sm md:text-lg max-w-2xl mx-auto">
+            Watch real families share their treatment journey, outcomes, and experience with our fertility team.
           </p>
         </div>
 
@@ -38,7 +40,7 @@ const VideoTestimonialsSection = () => {
           <button
             type="button"
             onClick={() => scrollByAmount("left")}
-            className="absolute left-2 md:-left-6 top-1/2 -translate-y-1/2 z-20 bg-background/95 border border-border shadow-elevated rounded-full p-3 hover:bg-primary hover:text-white transition-all opacity-0 group-hover:opacity-100"
+            className="hidden md:flex absolute left-2 md:-left-6 top-1/2 -translate-y-1/2 z-20 bg-background/95 border border-border shadow-elevated rounded-full p-3 hover:bg-primary hover:text-white transition-all opacity-0 group-hover:opacity-100"
             aria-label="Scroll left"
           >
             <ChevronLeft className="h-6 w-6" />
@@ -47,7 +49,7 @@ const VideoTestimonialsSection = () => {
           <button
             type="button"
             onClick={() => scrollByAmount("right")}
-            className="absolute right-2 md:-right-6 top-1/2 -translate-y-1/2 z-20 bg-background/95 border border-border shadow-elevated rounded-full p-3 hover:bg-primary hover:text-white transition-all opacity-0 group-hover:opacity-100"
+            className="hidden md:flex absolute right-2 md:-right-6 top-1/2 -translate-y-1/2 z-20 bg-background/95 border border-border shadow-elevated rounded-full p-3 hover:bg-primary hover:text-white transition-all opacity-0 group-hover:opacity-100"
             aria-label="Scroll right"
           >
             <ChevronRight className="h-6 w-6" />
@@ -55,15 +57,14 @@ const VideoTestimonialsSection = () => {
 
           <div 
             ref={scrollRef} 
-            className="overflow-x-auto scrollbar-hide px-2 md:px-4"
+            className="overflow-x-auto scrollbar-hide px-1 md:px-4 snap-x snap-mandatory"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
-            <div className="flex gap-6 min-w-max pb-6">
+            <div className="flex gap-4 md:gap-6 min-w-max pb-4 md:pb-6">
               {videoItems.map((video) => (
                 <div
                   key={video.id}
-                  /* LANDSCAPE DIMENSIONS: 16:9 Aspect Ratio */
-                  className="relative w-[320px] md:w-[480px] aspect-video overflow-hidden rounded-[2rem] bg-black shadow-card shrink-0 border border-border/50 group/card"
+                  className="relative snap-start w-[300px] md:w-[470px] aspect-video overflow-hidden rounded-[1.5rem] md:rounded-[2rem] bg-black shadow-card shrink-0 border border-border/50 group/card"
                 >
                   <video
                     src={buildCloudinaryVideoUrl(video.id)}
@@ -75,23 +76,31 @@ const VideoTestimonialsSection = () => {
                     preload="metadata"
                   />
 
+                  <div className="absolute top-3 left-3 md:top-4 md:left-4 inline-flex items-center gap-1.5 rounded-full bg-black/55 backdrop-blur-sm px-2.5 py-1 text-white text-[10px] md:text-xs font-semibold">
+                    <Play className="h-3 w-3 fill-current" />
+                    Real Story
+                  </div>
+
                   {/* UI Overlay */}
-                  <div className="absolute inset-x-0 bottom-0 p-5 flex items-end justify-between bg-gradient-to-t from-black/80 via-black/20 to-transparent">
-                    <div className="flex flex-col gap-1">
-                      <span className="text-[12px] font-bold text-white/90 uppercase tracking-widest">
-                        Success Story
+                  <div className="absolute inset-x-0 bottom-0 p-4 md:p-5 flex items-end justify-between bg-gradient-to-t from-black/85 via-black/25 to-transparent">
+                    <div className="flex flex-col gap-1.5">
+                      <span className="text-[11px] md:text-[12px] font-bold text-white/90 uppercase tracking-widest">
+                        {video.treatment}
                       </span>
-                      <span className="text-[14px] font-semibold text-white bg-white/20 backdrop-blur-md rounded-full px-3 py-1 w-fit">
+                      <span className="text-sm md:text-base font-bold text-white leading-tight">
+                        {video.title}
+                      </span>
+                      <span className="text-[12px] md:text-[14px] font-semibold text-white bg-white/20 backdrop-blur-md rounded-full px-3 py-1 w-fit">
                         {video.views}
                       </span>
                     </div>
                     
-                    <div className="flex items-center gap-3 text-white">
-                      <button className="p-2 bg-white/10 rounded-full hover:bg-rose-500 transition-colors">
-                        <Heart className="h-5 w-5 fill-current" />
+                    <div className="flex items-center gap-2 md:gap-3 text-white">
+                      <button className="p-2 bg-white/10 rounded-full hover:bg-rose-500 transition-colors" aria-label="Like story">
+                        <Heart className="h-4 w-4 md:h-5 md:w-5 fill-current" />
                       </button>
-                      <button className="p-2 bg-white/10 rounded-full hover:bg-primary transition-colors">
-                        <Send className="h-5 w-5" />
+                      <button className="p-2 bg-white/10 rounded-full hover:bg-primary transition-colors" aria-label="Share story">
+                        <Send className="h-4 w-4 md:h-5 md:w-5" />
                       </button>
                     </div>
                   </div>
@@ -99,6 +108,8 @@ const VideoTestimonialsSection = () => {
               ))}
             </div>
           </div>
+
+          <p className="md:hidden text-center text-xs text-muted-foreground mt-2">Swipe to explore more stories</p>
         </div>
       </div>
     </section>
