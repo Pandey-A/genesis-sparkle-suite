@@ -98,10 +98,10 @@ const AnimatedStat = ({ end, label, suffix = "", duration = 1300 }: AnimatedStat
   return (
     <div
       ref={statRef}
-      className={`rounded-xl border border-border bg-card px-3 py-3 md:px-4 md:py-4 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-elevated hover:border-[#c94c92]/40 ${isCounting ? "shadow-[0_10px_28px_-18px_rgba(201,76,146,0.55)] border-[#c94c92]/25" : ""} ${isPopped ? "scale-[1.03]" : "scale-100"}`}
+      className={`group rounded-xl border border-border bg-card px-3 py-3 md:px-4 md:py-4 text-center transition-all duration-500 hover:-translate-y-1 hover:shadow-elevated hover:border-[#c94c92]/40 ${hasStarted ? "opacity-100 translate-y-0 rotate-0" : "opacity-0 translate-y-3 -rotate-6"} ${isCounting ? "shadow-[0_10px_28px_-18px_rgba(201,76,146,0.55)] border-[#c94c92]/25" : ""} ${isPopped ? "scale-[1.03]" : "scale-100"}`}
     >
       <p className={`text-lg md:text-2xl font-extrabold tabular-nums transition-all duration-300 ${isCounting ? "text-[#c94c92]" : "text-foreground"}`}>
-        <span className={`inline-block transition-transform duration-300 ${isPopped ? "scale-110" : "scale-100"}`}>
+        <span className={`inline-block transition-transform duration-300 group-hover:translate-x-1 ${isPopped ? "scale-110" : "scale-100"}`}>
           {value.toLocaleString()}
           {suffix}
         </span>

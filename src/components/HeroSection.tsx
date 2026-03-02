@@ -29,8 +29,30 @@ const AnimatedCount: React.FC<AnimatedCountProps> = ({
   className,
 }) => {
   const [count, setCount] = useState(0);
+  const [hasStarted, setHasStarted] = useState(false);
+  const numberRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
+    const node = numberRef.current;
+    if (!node || hasStarted) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setHasStarted(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.4 }
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [hasStarted]);
+
+  useEffect(() => {
+    if (!hasStarted) return;
+
     let animationFrameId = 0;
     const startTime = performance.now();
 
@@ -47,9 +69,17 @@ const AnimatedCount: React.FC<AnimatedCountProps> = ({
     animationFrameId = requestAnimationFrame(updateCount);
 
     return () => cancelAnimationFrame(animationFrameId);
-  }, [duration, end]);
+  }, [duration, end, hasStarted]);
 
-  return <span className={className}>{count}{suffix}</span>;
+  return (
+    <span
+      ref={numberRef}
+      className={`inline-block transition-all duration-500 group-hover:translate-x-1 ${hasStarted ? "opacity-100 translate-y-0 rotate-0" : "opacity-0 translate-y-2 -rotate-12"} ${className ?? ""}`}
+    >
+      {count}
+      {suffix}
+    </span>
+  );
 };
 
 const LandingPage: React.FC = () => {
@@ -220,15 +250,15 @@ const LandingPage: React.FC = () => {
           {/* translate-y-1/2 puts the bar exactly in the middle of the bottom edge */}
           <div className="absolute left-3 right-3 md:left-6 md:right-6 bottom-0 translate-y-1/2 z-20 max-w-[1200px] mx-auto">
             <div className="bg-white rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.1)] border border-gray-50 p-3 md:p-10 grid grid-cols-3 gap-2 md:gap-6 items-center divide-x divide-gray-100">
-              <div className="flex flex-col md:flex-row items-center justify-center gap-0 md:gap-3 px-1 md:px-0 text-center md:text-left">
+              <div className="group flex flex-col md:flex-row items-center justify-center gap-0 md:gap-3 px-1 md:px-0 text-center md:text-left">
                 <AnimatedCount end={1000} suffix="+" className="text-xl md:text-2xl font-black text-gray-900" />
                 <span className="text-xs md:text-lg font-bold text-[#8E568F] leading-tight">IVF Babies Born</span>
               </div>
-              <div className="flex flex-col md:flex-row items-center justify-center gap-0 md:gap-3 px-1 md:px-0 text-center md:text-left">
+              <div className="group flex flex-col md:flex-row items-center justify-center gap-0 md:gap-3 px-1 md:px-0 text-center md:text-left">
                 <AnimatedCount end={3} suffix="+" className="text-xl md:text-2xl font-black text-gray-900" />
                 <span className="text-xs md:text-lg font-bold text-[#8E568F] leading-tight">Cities in India</span>
               </div>
-              <div className="flex flex-col md:flex-row items-center justify-center gap-0 md:gap-3 px-1 md:px-0 text-center md:text-left">
+              <div className="group flex flex-col md:flex-row items-center justify-center gap-0 md:gap-3 px-1 md:px-0 text-center md:text-left">
                 <AnimatedCount end={20} suffix="+" className="text-xl md:text-2xl font-black text-gray-900 leading-tight" />
                 <span className="text-xs md:text-lg font-bold text-[#8E568F] leading-tight"> Years Of Experienced Doctors</span>
               </div>
