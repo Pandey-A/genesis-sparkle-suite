@@ -1,7 +1,10 @@
 import { Phone, Mail, MapPin, Facebook, Instagram, Youtube } from "lucide-react";
 import babygenLogo from "@/assets/Babygen-Logo.webp";
+import { useLanguage } from "@/context/LanguageContext";
 
 const Footer = () => {
+  const { t } = useLanguage();
+
   const socials = [
     {
       label: "Facebook",
@@ -40,13 +43,12 @@ const Footer = () => {
               </div>
             </div>
             <p className="text-sm leading-relaxed text-primary-foreground/60">
-              Our team at Babygen IVF has helped thousands of childless couples achieve their dream 
-              of having a healthy baby. Our doctors and counsellors guide couples every step of the way.
+              {t("footer.about")}
             </p>
           </div>
 
           <div>
-            <h4 className="font-display text-lg font-bold text-primary-foreground mb-4">Contact Us</h4>
+            <h4 className="font-display text-lg font-bold text-primary-foreground mb-4">{t("footer.contactTitle")}</h4>
             <div className="space-y-3 text-sm">
               <a href="tel:7314855000" className="flex items-center gap-2 hover:text-primary-foreground transition-colors">
                 <Phone className="h-4 w-4" /> 731 485 5000
@@ -56,15 +58,15 @@ const Footer = () => {
               </a>
               <div className="flex items-start gap-2">
                 <MapPin className="h-4 w-4 shrink-0 mt-0.5" />
-                <span>2nd Floor, Kumar Prism, Amanora Park Town, Hadapsar, Pune</span>
+                <span>{t("footer.address")}</span>
               </div>
             </div>
           </div>
 
           <div>
-            <h4 className="font-display text-lg font-bold text-primary-foreground mb-4">Important Links</h4>
+            <h4 className="font-display text-lg font-bold text-primary-foreground mb-4">{t("footer.linksTitle")}</h4>
             <div className="space-y-2 text-sm">
-              {["About Us", "Privacy Policy", "Disclaimer", "Contact Us"].map((link) => (
+              {[t("footer.link.about"), t("footer.link.privacy"), t("footer.link.disclaimer"), t("footer.link.contact")].map((link) => (
                 <a key={link} href="#" className="block hover:text-primary-foreground transition-colors">
                   {link}
                 </a>
@@ -92,7 +94,7 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-primary-foreground/10 pt-6 text-center text-xs text-primary-foreground/40">
-          © 2026 Babygen IVF, Pune. All rights reserved.
+          {t("footer.copyright")}
         </div>
       </div>
     </footer>

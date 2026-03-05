@@ -70,6 +70,25 @@ Cloudinary is now integrated with a reusable image helper.
 
 If Cloudinary env vars are missing, the app automatically falls back to local images.
 
+## EmailJS setup (Hero + Contact forms)
+
+Both lead forms now send enquiry details through EmailJS before redirecting to the thank-you page.
+
+1. Copy `.env.example` to `.env` (if not already done).
+2. Add the following values from your EmailJS dashboard:
+	- `VITE_EMAILJS_SERVICE_ID`
+	- `VITE_EMAILJS_TEMPLATE_ID`
+	- `VITE_EMAILJS_PUBLIC_KEY`
+3. In your EmailJS template, map these variables:
+	- `form_source`
+	- `service`
+	- `from_name`
+	- `from_email`
+	- `phone`
+	- `submitted_at`
+
+If any EmailJS env value is missing, form submission will fail and users will see an error message on the form.
+
 ## How can I deploy this project?
 
 Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.

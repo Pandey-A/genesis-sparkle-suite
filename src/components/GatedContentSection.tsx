@@ -1,36 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-
-const gatedModules = [
-  {
-    title: "5 Mistakes That Reduce IVF Success Chances",
-    desc: "Avoid common decisions that waste time, increase stress, and lower outcomes.",
-    cta: "Unlock This Guide",
-  },
-  {
-    title: "7 Problems People Face While Choosing IVF in Pune",
-    desc: "Spot red flags early and choose a center that is transparent and clinically strong.",
-    cta: "Read Before You Decide",
-  },
-  {
-    title: "Questions You Must Ask Before Starting IVF",
-    desc: "Use this checklist in your first consultation so you can compare centers fairly.",
-    cta: "Get The Question List",
-  },
-];
-
-const riskPoints = [
-  "Inexperienced doctors and embryologists can significantly reduce success rates.",
-  "Poorly equipped labs can impact embryo quality and treatment outcomes.",
-  "Low-quality consumables may reduce overall effectiveness of treatment.",
-  "Hidden costs are often added later for injections, tests, and procedures.",
-];
-
-const verifyPoints = [
-  "Ask for age-wise and case-wise success data, not only marketing claims.",
-  "Confirm all major costs in writing before starting treatment.",
-  "Check if the center has complete IVF + ICSI + freezing infrastructure.",
-  "Verify whether the same specialist will manage your full cycle.",
-];
+import { useLanguage } from "@/context/LanguageContext";
 
 type AnimatedStatProps = {
   end: number;
@@ -112,34 +81,66 @@ const AnimatedStat = ({ end, label, suffix = "", duration = 1300 }: AnimatedStat
 };
 
 const GatedContentSection = () => {
+  const { t } = useLanguage();
+  const gatedModules = [
+    {
+      title: t("gated.resource1.title"),
+      desc: t("gated.resource1.desc"),
+      cta: t("gated.resource1.cta"),
+    },
+    {
+      title: t("gated.resource2.title"),
+      desc: t("gated.resource2.desc"),
+      cta: t("gated.resource2.cta"),
+    },
+    {
+      title: t("gated.resource3.title"),
+      desc: t("gated.resource3.desc"),
+      cta: t("gated.resource3.cta"),
+    },
+  ];
+
+  const riskPoints = [
+    t("gated.risk1"),
+    t("gated.risk2"),
+    t("gated.risk3"),
+    t("gated.risk4"),
+  ];
+
+  const verifyPoints = [
+    t("gated.verify1"),
+    t("gated.verify2"),
+    t("gated.verify3"),
+    t("gated.verify4"),
+  ];
+
   return (
     <section className="py-14 md:py-20 bg-background">
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="text-center mb-8 md:mb-12">
           <p className="inline-flex rounded-full bg-[#c94c92]/10 px-4 py-1.5 text-xs md:text-sm font-semibold text-[#c94c92] mb-4">
-            Free IVF Decision Resources
+            {t("gated.badge")}
           </p>
           <h2 className="text-2xl md:text-4xl font-bold text-foreground leading-tight mb-3">
-            Before You Choose an IVF Centre, Read This First
+            {t("gated.title")}
           </h2>
           <p className="text-sm md:text-lg text-muted-foreground max-w-3xl mx-auto">
-            In <b className="text-black">20+ years</b>, our team has supported <b className="text-black">8000+ couples</b> across <b className="text-black">14 countries</b>. These resources help you
-            avoid costly mistakes and make confident treatment decisions.
+            {t("gated.description")}
           </p>
           <p className="mt-4 text-sm md:text-base font-bold text-[#c94c92]">
-            Save upto Rs. 40000. Only 3 slots left!!
+            {t("common.offerLine")}
           </p>
         </div>
 
         <div className="grid grid-cols-3 gap-2 md:gap-2 mb-8 md:mb-12">
-          <AnimatedStat end={8000} suffix="+" label="Couples Supported" />
-          <AnimatedStat end={14} label="Countries" />
-          <AnimatedStat end={20} suffix="+" label="Years Experience" />
+          <AnimatedStat end={8000} suffix="+" label={t("gated.stats.couples")} />
+          <AnimatedStat end={14} label={t("gated.stats.countries")} />
+          <AnimatedStat end={20} suffix="+" label={t("gated.stats.years")} />
         </div>
 
         <div className="grid lg:grid-cols-2 gap-4 md:gap-6 mb-10 md:mb-14">
           <div className="rounded-2xl border border-border bg-card p-5 md:p-7">
-            <h3 className="text-lg md:text-2xl font-bold text-[#c94c92] mb-4">What goes wrong with poor IVF centre selection?</h3>
+            <h3 className="text-lg md:text-2xl font-bold text-[#c94c92] mb-4">{t("gated.riskTitle")}</h3>
             <ul className="space-y-3 text-sm md:text-base text-foreground/90">
               {riskPoints.map((point) => (
                 <li key={point} className="flex gap-2.5 leading-relaxed">
@@ -151,7 +152,7 @@ const GatedContentSection = () => {
           </div>
 
           <div className="rounded-2xl border border-border bg-card p-5 md:p-7">
-            <h3 className="text-lg md:text-2xl font-bold text-[#c94c92] mb-4">What should you verify before starting IVF?</h3>
+            <h3 className="text-lg md:text-2xl font-bold text-[#c94c92] mb-4">{t("gated.verifyTitle")}</h3>
             <ul className="space-y-3 text-sm md:text-base text-foreground/90">
               {verifyPoints.map((point) => (
                 <li key={point} className="flex gap-2.5 leading-relaxed">
@@ -166,7 +167,7 @@ const GatedContentSection = () => {
         <div className="grid md:grid-cols-3 gap-4 md:gap-6">
           {gatedModules.map((module) => (
             <div key={module.title} className="rounded-2xl border border-border bg-card p-5 md:p-6 flex flex-col">
-              <p className="text-xs font-semibold text-[#c94c92] mb-2">Resource</p>
+              <p className="text-xs font-semibold text-[#c94c92] mb-2">{t("gated.resourceLabel")}</p>
               <h4 className="text-base md:text-xl font-bold text-foreground leading-snug mb-3">{module.title}</h4>
               <p className="text-sm text-muted-foreground mb-5 flex-1">{module.desc}</p>
               <a
@@ -180,25 +181,23 @@ const GatedContentSection = () => {
         </div>
 
         <div className="mt-8 md:mt-10 rounded-2xl bg-[#c94c92]/10 border border-[#c94c92]/20 p-5 md:p-7 text-center">
-          <h3 className="text-lg md:text-2xl font-bold text-foreground mb-2">Need help deciding quickly?</h3>
-          <p className="text-sm md:text-base text-muted-foreground mb-5">
-            Talk to our IVF counsellor and get a personalized treatment roadmap.
-          </p>
+          <h3 className="text-lg md:text-2xl font-bold text-foreground mb-2">{t("gated.helpTitle")}</h3>
+          <p className="text-sm md:text-base text-muted-foreground mb-5">{t("gated.helpDesc")}</p>
           <p className="text-sm md:text-base font-bold text-[#c94c92] mb-5">
-            Save upto Rs. 40000. Only 3 slots left!!
+            {t("common.offerLine")}
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
             <a
               href="#contact"
               className="inline-flex items-center justify-center rounded-full bg-[#c94c92] px-6 py-3 text-sm font-semibold text-white hover:opacity-90 transition-opacity"
             >
-              Book Free Consultation
+              {t("gated.bookFree")}
             </a>
             <a
               href="tel:7314855000"
               className="inline-flex items-center justify-center rounded-full border border-[#c94c92] px-6 py-3 text-sm font-semibold text-[#c94c92] hover:bg-[#c94c92]/10 transition-colors"
             >
-              Call Now
+              {t("common.callNow")}
             </a>
           </div>
         </div>

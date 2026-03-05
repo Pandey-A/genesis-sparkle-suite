@@ -7,6 +7,7 @@ import lemonBabygen from "@/assets/marque/Lemon-babygen-ivf.webp";
 import naiDuniya from "@/assets/marque/nai-duniya.webp";
 import radio from "@/assets/marque/radio.webp";
 import toi from "@/assets/marque/toi.webp";
+import { useLanguage } from "@/context/LanguageContext";
 
 const marqueeLogos = [
   { src: akashwani, alt: "Akashwani" },
@@ -21,11 +22,13 @@ const marqueeLogos = [
 ];
 
 const MarqueeSection = () => {
+  const { t } = useLanguage();
+
   return (
     <section className="py-8 overflow-hidden">
       <div className="container mx-auto px-4">
         <h2 className="text-center text-3xl md:text-3xl font-bold text-[#c94c92] mb-8">
-          IVF Success By Our Team Covered Across Media
+          {t("marquee.title")}
         </h2>
       </div>
       <div className="marquee-track">

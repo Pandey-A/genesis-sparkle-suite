@@ -1,16 +1,18 @@
 import { useRef } from "react";
 import { Heart, Send, ChevronLeft, ChevronRight, Play } from "lucide-react";
 import { buildCloudinaryVideoUrl } from "@/lib/cloudinary";
-
-const videoItems = [
-  { id: "Testimonial-3_ri72v3", views: "15.4K Views", title: "After 8 Years of Hope", treatment: "IVF + ICSI" },
-  { id: "Testimonial-6_dyfjjr", views: "7.4K Views", title: "Our First Positive Result", treatment: "IVF" },
-  { id: "Testimonial-2_e3asbp", views: "5.3K Views", title: "Trusted Team, Better Journey", treatment: "Consultation + IVF" },
-  { id: "Testimonial-1_ffq4ou", views: "27.5K Views", title: "From Doubt to Parenthood", treatment: "IVF + Embryo Transfer" },
-  { id: "Testimonial-5_qalsln", views: "13.6K Views", title: "High-Risk Case, Happy Ending", treatment: "Advanced Fertility Care" },
-];
+import { useLanguage } from "@/context/LanguageContext";
 
 const VideoTestimonialsSection = () => {
+  const { t } = useLanguage();
+  const videoItems = [
+    { id: "Testimonial-3_ri72v3", views: t("videos.views1"), title: t("videos.title1"), treatment: t("videos.treatment1") },
+    { id: "Testimonial-6_dyfjjr", views: t("videos.views2"), title: t("videos.title2"), treatment: t("videos.treatment2") },
+    { id: "Testimonial-2_e3asbp", views: t("videos.views3"), title: t("videos.title3"), treatment: t("videos.treatment3") },
+    { id: "Testimonial-1_ffq4ou", views: t("videos.views4"), title: t("videos.title4"), treatment: t("videos.treatment4") },
+    { id: "Testimonial-5_qalsln", views: t("videos.views5"), title: t("videos.title5"), treatment: t("videos.treatment5") },
+  ];
+
   const scrollRef = useRef<HTMLDivElement | null>(null);
 
   const scrollByAmount = (direction: "left" | "right") => {
@@ -25,13 +27,13 @@ const VideoTestimonialsSection = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-8 md:mb-10">
           <p className="inline-flex rounded-full bg-primary/10 text-primary px-4 py-1.5 text-xs md:text-sm font-semibold mb-4">
-            Real Patient Journeys
+            {t("videos.badge")}
           </p>
           <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-2 md:mb-3">
-            IVF Success Stories
+            {t("videos.title")}
           </h2>
           <p className="text-muted-foreground text-sm md:text-lg max-w-2xl mx-auto">
-            Watch real families share their treatment journey, outcomes, and experience with our fertility team.
+            {t("videos.subtitle")}
           </p>
         </div>
 
@@ -41,7 +43,7 @@ const VideoTestimonialsSection = () => {
             type="button"
             onClick={() => scrollByAmount("left")}
             className="hidden md:flex absolute left-2 md:-left-6 top-1/2 -translate-y-1/2 z-20 bg-background/95 border border-border shadow-elevated rounded-full p-3 hover:bg-primary hover:text-white transition-all opacity-0 group-hover:opacity-100"
-            aria-label="Scroll left"
+            aria-label={t("videos.scrollLeft")}
           >
             <ChevronLeft className="h-6 w-6" />
           </button>
@@ -50,7 +52,7 @@ const VideoTestimonialsSection = () => {
             type="button"
             onClick={() => scrollByAmount("right")}
             className="hidden md:flex absolute right-2 md:-right-6 top-1/2 -translate-y-1/2 z-20 bg-background/95 border border-border shadow-elevated rounded-full p-3 hover:bg-primary hover:text-white transition-all opacity-0 group-hover:opacity-100"
-            aria-label="Scroll right"
+            aria-label={t("videos.scrollRight")}
           >
             <ChevronRight className="h-6 w-6" />
           </button>
@@ -78,7 +80,7 @@ const VideoTestimonialsSection = () => {
 
                   <div className="absolute top-3 left-3 md:top-4 md:left-4 inline-flex items-center gap-1.5 rounded-full bg-black/55 backdrop-blur-sm px-2.5 py-1 text-white text-[10px] md:text-xs font-semibold">
                     <Play className="h-3 w-3 fill-current" />
-                    Real Story
+                    {t("videos.realStory")}
                   </div>
 
                   {/* UI Overlay */}
@@ -96,10 +98,10 @@ const VideoTestimonialsSection = () => {
                     </div>
                     
                     <div className="flex items-center gap-2 md:gap-3 text-white">
-                      <button className="p-2 bg-white/10 rounded-full hover:bg-rose-500 transition-colors" aria-label="Like story">
+                      <button className="p-2 bg-white/10 rounded-full hover:bg-rose-500 transition-colors" aria-label={t("videos.likeStory")}>
                         <Heart className="h-4 w-4 md:h-5 md:w-5 fill-current" />
                       </button>
-                      <button className="p-2 bg-white/10 rounded-full hover:bg-primary transition-colors" aria-label="Share story">
+                      <button className="p-2 bg-white/10 rounded-full hover:bg-primary transition-colors" aria-label={t("videos.shareStory")}>
                         <Send className="h-4 w-4 md:h-5 md:w-5" />
                       </button>
                     </div>
@@ -109,7 +111,7 @@ const VideoTestimonialsSection = () => {
             </div>
           </div>
 
-          <p className="md:hidden text-center text-xs text-muted-foreground mt-2">Swipe to explore more stories</p>
+          <p className="md:hidden text-center text-xs text-muted-foreground mt-2">{t("videos.swipeHint")}</p>
         </div>
       </div>
     </section>

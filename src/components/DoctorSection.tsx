@@ -79,7 +79,7 @@ const DoctorSection = () => {
       <div className="container mx-auto px-4">
         <div className="lg:hidden text-center mb-6">
           <p className="inline-flex rounded-full bg-primary/10 text-primary px-4 py-1.5 text-xs font-semibold mb-3">
-            IVF Expert Message
+            {t("doctor.expertMessage")}
           </p>
           <h2 className="font-display text-2xl font-bold text-foreground leading-tight">
             {t("doctor.heading.prefix")} <span className="text-gradient">{t("doctor.heading.name")}</span>
@@ -116,15 +116,15 @@ const DoctorSection = () => {
             <div className="mt-4 grid grid-cols-3 gap-2 md:gap-3 max-w-sm mx-auto lg:mx-0">
               <div className="rounded-xl border border-border bg-card px-2 py-2 md:px-3 md:py-2.5 text-center">
                 <p className="text-base md:text-lg font-extrabold text-foreground">20+</p>
-                <p className="text-[10px] md:text-xs text-muted-foreground font-semibold">Years</p>
+                <p className="text-[10px] md:text-xs text-muted-foreground font-semibold">{t("doctor.stat.years")}</p>
               </div>
               <div className="rounded-xl border border-border bg-card px-2 py-2 md:px-3 md:py-2.5 text-center">
                 <p className="text-base md:text-lg font-extrabold text-foreground">10K+</p>
-                <p className="text-[10px] md:text-xs text-muted-foreground font-semibold">IVF/ICSI</p>
+                <p className="text-[10px] md:text-xs text-muted-foreground font-semibold">{t("doctor.stat.ivficsi")}</p>
               </div>
               <div className="rounded-xl border border-border bg-card px-2 py-2 md:px-3 md:py-2.5 text-center">
                 <p className="text-base md:text-lg font-extrabold text-foreground">8K+</p>
-                <p className="text-[10px] md:text-xs text-muted-foreground font-semibold">Successes</p>
+                <p className="text-[10px] md:text-xs text-muted-foreground font-semibold">{t("doctor.stat.successes")}</p>
               </div>
             </div>
           </motion.div>
@@ -137,7 +137,7 @@ const DoctorSection = () => {
             className="lg:pr-4"
           >
             <p className="hidden lg:inline-flex rounded-full bg-primary/10 text-primary px-4 py-1.5 text-xs md:text-sm font-semibold mb-4">
-              IVF Expert Message
+              {t("doctor.expertMessage")}
             </p>
 
             <h2 className="hidden lg:block font-display text-3xl md:text-4xl font-bold text-foreground mb-4 leading-tight">
@@ -150,15 +150,15 @@ const DoctorSection = () => {
             <div className="grid sm:grid-cols-3 gap-2 md:gap-3 mb-6">
               <div className="inline-flex items-center gap-2 rounded-xl border border-border bg-card px-3 py-2 text-xs md:text-sm font-semibold text-foreground">
                 <Award className="h-4 w-4 text-primary" />
-                20+ Years
+                {t("doctor.badge.years")}
               </div>
               <div className="inline-flex items-center gap-2 rounded-xl border border-border bg-card px-3 py-2 text-xs md:text-sm font-semibold text-foreground">
                 <Microscope className="h-4 w-4 text-primary" />
-                IVF + ICSI
+                {t("doctor.badge.ivficsi")}
               </div>
               <div className="inline-flex items-center gap-2 rounded-xl border border-border bg-card px-3 py-2 text-xs md:text-sm font-semibold text-foreground">
                 <Globe2 className="h-4 w-4 text-primary" />
-                Global Training
+                {t("doctor.badge.global")}
               </div>
             </div>
 

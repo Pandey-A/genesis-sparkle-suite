@@ -1,10 +1,22 @@
+"use client";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import emailjs from '@emailjs/browser';
+import { useLanguage } from "@/context/LanguageContext";
+
+// EmailJS Configuration
+const PUBLIC_KEY = "xtY2ROIREFxFMiKHw";
+const SERVICE_ID = "service_3fgv0du";
+const TEMPLATE_ID = "template_d5e6qyy";
+const DESTINATION_EMAIL = "babygenivfpune@gmail.com";
 
 const ContactSection = () => {
+  const { t } = useLanguage();
   const navigate = useNavigate();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
   const [formData, setFormData] = useState({
     service: "",
     name: "",
@@ -12,10 +24,39 @@ const ContactSection = () => {
     phone: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setFormData({ service: "", name: "", email: "", phone: "" });
-    navigate("/thank-you");
+    setSubmitError("");
+    setIsSubmitting(true);
+
+    // Map state to EmailJS Template Parameters
+    const templateParams = {
+      to_email: DESTINATION_EMAIL,
+      from_name: formData.name,
+      from_email: formData.email || "Not provided",
+      from_phone: formData.phone,
+      service_type: formData.service,
+      date: new Date().toLocaleString(),
+    };
+
+    emailjs
+      .send(
+        SERVICE_ID,
+        TEMPLATE_ID,
+        templateParams,
+        PUBLIC_KEY
+      )
+      .then(() => {
+        setFormData({ service: "", name: "", email: "", phone: "" });
+        navigate("/thank-you");
+      })
+      .catch((error) => {
+        setSubmitError(t("hero.status.failed"));
+        console.error("EmailJS Error:", error);
+      })
+      .finally(() => {
+        setIsSubmitting(false);
+      });
   };
 
   return (
@@ -28,9 +69,9 @@ const ContactSection = () => {
           className="text-center mb-14"
         >
           <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-3">
-            Contact Us
+            {t("contact.title")}
           </h2>
-          <p className="text-muted-foreground text-lg">Request a consultation today</p>
+          <p className="text-muted-foreground text-lg">{t("contact.subtitle")}</p>
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-12 max-w-5xl mx-auto items-start">
@@ -48,14 +89,14 @@ const ContactSection = () => {
               className="w-full px-4 py-3 rounded-xl border border-input bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-ring"
               required
             >
-              <option value="">Select Service</option>
-              <option value="ivf">IVF Treatment</option>
-              <option value="consultation">General Consultation</option>
-              <option value="gynaecology">Gynaecologist</option>
+              <option value="">{t("hero.selectService")}</option>
+              <option value="IVF Treatment">{t("hero.service.ivf")}</option>
+              <option value="Consultation">{t("hero.service.consultation")}</option>
+              <option value="Gynaecologist">{t("hero.service.gynaecologist")}</option>
             </select>
             <input
               type="text"
-              placeholder="Your Name"
+              placeholder={t("contact.input.name")}
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               className="w-full px-4 py-3 rounded-xl border border-input bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-ring"
@@ -63,14 +104,14 @@ const ContactSection = () => {
             />
             <input
               type="email"
-              placeholder="Your Email Address (Optional)"
+              placeholder={t("contact.input.email")}
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               className="w-full px-4 py-3 rounded-xl border border-input bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-ring"
             />
             <input
               type="tel"
-              placeholder="Your Phone Number"
+              placeholder={t("contact.input.phone")}
               value={formData.phone}
               onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
               className="w-full px-4 py-3 rounded-xl border border-input bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-ring"
@@ -78,10 +119,15 @@ const ContactSection = () => {
             />
             <button
               type="submit"
-              className="w-full gradient-hero text-primary-foreground py-3.5 rounded-xl font-semibold text-base hover:opacity-90 transition-opacity"
+              disabled={isSubmitting}
+              className="w-full gradient-hero text-primary-foreground py-3.5 rounded-xl font-semibold text-base hover:opacity-90 transition-opacity disabled:opacity-50"
             >
-              Send Request
+              {isSubmitting ? t("hero.status.sending") : t("contact.submit")}
             </button>
+
+            {submitError ? (
+              <p className="text-sm text-red-500 font-medium text-center">{submitError}</p>
+            ) : null}
           </motion.form>
 
           {/* Contact info */}
@@ -93,10 +139,10 @@ const ContactSection = () => {
           >
             <div className="bg-accent/50 rounded-2xl p-6 space-y-5">
               {[
-                { icon: Phone, label: "Phone", value: "731 485 5000", href: "tel:7314855000" },
-                { icon: Mail, label: "Email", value: "babygenivf@gmail.com", href: "mailto:babygenivf@gmail.com" },
-                { icon: MapPin, label: "Address", value: "2nd Floor, Kumar Prism, Amanora Park Town, Hadapsar, Pune" },
-                { icon: Clock, label: "Hours", value: "Mon – Sat: 9:00 AM – 7:00 PM" },
+                { icon: Phone, label: t("contact.info.phone"), value: "731 485 5000", href: "tel:7314855000" },
+                { icon: Mail, label: t("contact.info.email"), value: "babygenivfpune@gmail.com", href: "mailto:babygenivfpune@gmail.com" },
+                { icon: MapPin, label: t("contact.info.address"), value: t("contact.info.addressValue") },
+                { icon: Clock, label: t("contact.info.hours"), value: t("contact.info.hoursValue") },
               ].map((item) => (
                 <div key={item.label} className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-xl gradient-hero flex items-center justify-center text-primary-foreground shrink-0">
@@ -127,16 +173,16 @@ const ContactSection = () => {
         >
           <div className="gradient-hero rounded-2xl p-6 text-center">
             <p className="text-primary-foreground font-display text-xl font-bold mb-2">
-              Save upto Rs. 40000
+              {t("common.saveUpto")}
             </p>
-            <p className="text-primary-foreground/80 text-sm mb-4">Only 3 slots left!!</p>
+            <p className="text-primary-foreground/80 text-sm mb-4">{t("common.slotsLeft")}</p>
             <a
               href="https://wa.me/917314855000?text=Hello,%20I%20would%20like%20to%20book%20an%20appointment"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex bg-background text-primary font-semibold px-6 py-2.5 rounded-full text-sm hover:bg-accent transition-colors"
             >
-              Chat on WhatsApp
+              {t("common.chatWhatsapp")}
             </a>
           </div>
         </motion.div>

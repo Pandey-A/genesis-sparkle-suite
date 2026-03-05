@@ -14,11 +14,11 @@ const Navbar: React.FC = () => {
 
   // Navigation links updated to match the clean, professional style
   const navLinks = [
-    { key: "header.nav.doctors", label: "Doctors", href: "#", hasDropdown: false },
-    { key: "header.nav.centers", label: "Fertility Centers", href: "#", hasDropdown: true },
-    { key: "header.nav.services", label: "Services", href: "#", hasDropdown: true },
-    { key: "header.nav.blog", label: "Blogs", href: "#", hasDropdown: false },
-    { key: "header.nav.stories", label: "Web stories", href: "#", hasDropdown: false },
+    { key: "header.nav.doctors", href: "#", hasDropdown: false },
+    { key: "header.nav.centers", href: "#", hasDropdown: true },
+    { key: "header.nav.services", href: "#", hasDropdown: true },
+    { key: "header.nav.blog", href: "#", hasDropdown: false },
+    { key: "header.nav.stories", href: "#", hasDropdown: false },
   ];
 
   return (
@@ -33,7 +33,7 @@ const Navbar: React.FC = () => {
           <img 
             src={logo}
             alt="Babygen IVF Centre Logo" 
-            className="h-12 md:h-16 w-auto object-contain"
+            className="h-14 md:h-16 w-auto object-contain"
           />
           <div className="hidden sm:flex flex-col border-l pl-3 border-gray-200">
             <span className="text-md font-bold text-[#1A365D] leading-tight">
@@ -49,12 +49,12 @@ const Navbar: React.FC = () => {
         <div className="hidden xl:flex items-center gap-8">
           <ul className="flex items-center gap-6">
             {navLinks.map((link) => (
-              <li key={link.label} className="relative group">
+              <li key={link.key} className="relative group">
                 <a 
                   href={link.href} 
                   className="flex items-center gap-1 text-[16px] font-medium text-gray-700 hover:text-[#D15B8F] transition-colors"
                 >
-                  {link.label}
+                  {t(link.key)}
                   {link.hasDropdown && (
                     <ChevronDown size={14} className="text-gray-400 group-hover:rotate-180 transition-transform" />
                   )}
@@ -85,9 +85,9 @@ const Navbar: React.FC = () => {
               onChange={(e) => setLanguage(e.target.value as any)}
               className="appearance-none bg-transparent text-sm font-medium outline-none cursor-pointer pr-6 w-full text-gray-700"
             >
-              <option value="en">English</option>
-              <option value="hi">Hindi</option>
-              <option value="mr">Marathi</option>
+              <option value="en">{t("lang.english")}</option>
+              <option value="hi">{t("lang.hindi")}</option>
+              <option value="mr">{t("lang.marathi")}</option>
             </select>
             <ChevronDown size={14} className="absolute right-2 pointer-events-none text-gray-500" />
           </div>
@@ -96,7 +96,7 @@ const Navbar: React.FC = () => {
             href="#" 
             className="bg-gradient-to-r from-[#B55D7B] to-[#D15B8F] text-white px-6 py-3 rounded-md font-bold text-sm hover:opacity-90 transition-opacity whitespace-nowrap"
           >
-            Book Appointment
+            {t("common.bookAppointment")}
           </a>
         </div>
 
@@ -122,9 +122,9 @@ const Navbar: React.FC = () => {
             </div>
             <ul className="flex flex-col gap-5">
               {navLinks.map((link) => (
-                <li key={link.label}>
+                <li key={link.key}>
                   <a href={link.href} className="text-lg font-semibold text-gray-800 flex justify-between items-center">
-                    {link.label}
+                    {t(link.key)}
                     {link.hasDropdown && <ChevronDown size={18} />}
                   </a>
                 </li>
@@ -135,7 +135,7 @@ const Navbar: React.FC = () => {
                 <Phone size={18} fill="currentColor" /> 731 485 5000
               </a>
               <a href="#" className="bg-[#D15B8F] text-white text-center py-4 rounded-md font-bold">
-                Book Appointment
+                {t("common.bookAppointment")}
               </a>
             </div>
           </div>

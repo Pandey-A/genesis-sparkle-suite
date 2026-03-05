@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Award, ShieldCheck, FileCheck } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 // Importing all certificates
 import cert1 from "@/assets/certificates/1-1-1024x768.webp";
@@ -15,22 +16,23 @@ import cert10 from "@/assets/certificates/10-1024x768.webp";
 import cert11 from "@/assets/certificates/11-1024x768.webp";
 import cert12 from "@/assets/certificates/12-1024x768.webp";
 
-const certificates = [
-  { src: cert1, title: "Medical Accreditation" },
-  { src: cert2, title: "IVF Specialization" },
-  { src: cert3, title: "Clinical Excellence" },
-  { src: cert4, title: "International Standards" },
-  { src: cert5, title: "Laboratory Certification" },
-  { src: cert6, title: "Quality Assurance" },
-  { src: cert7, title: "Healthcare Compliance" },
-  { src: cert8, title: "Safety Protocol" },
-  { src: cert9, title: "Advanced Embryology" },
-  { src: cert10, title: "Professional Affiliation" },
-  { src: cert11, title: "Patient Care Award" },
-  { src: cert12, title: "Innovation in IVF" },
-];
-
 const CertificatesSection = () => {
+  const { t } = useLanguage();
+  const certificates = [
+    { src: cert1, title: t("cert.card1") },
+    { src: cert2, title: t("cert.card2") },
+    { src: cert3, title: t("cert.card3") },
+    { src: cert4, title: t("cert.card4") },
+    { src: cert5, title: t("cert.card5") },
+    { src: cert6, title: t("cert.card6") },
+    { src: cert7, title: t("cert.card7") },
+    { src: cert8, title: t("cert.card8") },
+    { src: cert9, title: t("cert.card9") },
+    { src: cert10, title: t("cert.card10") },
+    { src: cert11, title: t("cert.card11") },
+    { src: cert12, title: t("cert.card12") },
+  ];
+
   return (
     <section id="certificates" className="py-24 bg-secondary">
       <div className="container mx-auto px-4">
@@ -43,13 +45,13 @@ const CertificatesSection = () => {
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-bold mb-4">
             <ShieldCheck size={18} />
-            Certified Excellence
+            {t("cert.badge")}
           </div>
           <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-4">
-            Certifications & Affiliations
+            {t("cert.title")}
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Our center adheres to the highest international standards of medical safety and ethical practices.
+            {t("cert.subtitle")}
           </p>
         </motion.div>
 
@@ -92,13 +94,13 @@ const CertificatesSection = () => {
         >
            {/* Add any specific small logos here if needed */}
            <div className="flex items-center gap-2 font-display font-bold text-xl">
-             <Award className="text-primary" /> ICMR ENROLLED
+             <Award className="text-primary" /> {t("cert.badge1")}
            </div>
            <div className="flex items-center gap-2 font-display font-bold text-xl">
-             <ShieldCheck className="text-primary" /> ISO CERTIFIED
+             <ShieldCheck className="text-primary" /> {t("cert.badge2")}
            </div>
            <div className="flex items-center gap-2 font-display font-bold text-xl">
-             <FileCheck className="text-primary" /> ISAR AFFILIATED
+             <FileCheck className="text-primary" /> {t("cert.badge3")}
            </div>
         </motion.div>
       </div>
