@@ -155,7 +155,7 @@ const LandingPage: React.FC = () => {
                 </span>
               </div>
               <div className="flex flex-wrap gap-4">
-                <a href="tel:7314855000" className="flex items-center gap-3 px-8 py-4 bg-white border-2 border-[#0054A6] text-[#0054A6] rounded-xl font-bold text-lg hover:bg-blue-50 transition-all shadow-sm">
+                <a href="tel:07314855000" className="flex items-center gap-3 px-8 py-4 bg-white border-2 border-[#0054A6] text-[#0054A6] rounded-xl font-bold text-lg hover:bg-blue-50 transition-all shadow-sm">
                   <PhoneCall size={22} /> {t("common.callUs")}
                 </a>
                 <a href="#form" className="flex items-center gap-3 px-8 py-4 bg-[#D97017] text-white rounded-xl font-bold text-lg hover:bg-[#c26213] transition-all shadow-lg">

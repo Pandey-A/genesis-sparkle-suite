@@ -139,7 +139,7 @@ const ContactSection = () => {
           >
             <div className="bg-accent/50 rounded-2xl p-6 space-y-5">
               {[
-                { icon: Phone, label: t("contact.info.phone"), value: "731 485 5000", href: "tel:7314855000" },
+                { icon: Phone, label: t("contact.info.phone"), value: "07314855000", href: "tel:07314855000" },
                 { icon: Mail, label: t("contact.info.email"), value: "babygenivfpune@gmail.com", href: "mailto:babygenivfpune@gmail.com" },
                 { icon: MapPin, label: t("contact.info.address"), value: t("contact.info.addressValue") },
                 { icon: Clock, label: t("contact.info.hours"), value: t("contact.info.hoursValue") },

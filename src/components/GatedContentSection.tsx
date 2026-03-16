@@ -194,7 +194,7 @@ const GatedContentSection = () => {
               {t("gated.bookFree")}
             </a>
             <a
-              href="tel:7314855000"
+              href="tel:07314855000"
               className="inline-flex items-center justify-center rounded-full border border-[#c94c92] px-6 py-3 text-sm font-semibold text-[#c94c92] hover:bg-[#c94c92]/10 transition-colors"
             >
               {t("common.callNow")}

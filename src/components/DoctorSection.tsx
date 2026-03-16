@@ -84,6 +84,9 @@ const DoctorSection = () => {
           <h2 className="font-display text-2xl font-bold text-foreground leading-tight">
             {t("doctor.heading.prefix")} <span className="text-gradient">{t("doctor.heading.name")}</span>
           </h2>
+          <p className="mt-2 text-xs sm:text-sm text-muted-foreground font-medium leading-relaxed max-w-2xl mx-auto">
+            {t("doctor.degrees")}
+          </p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -107,6 +110,9 @@ const DoctorSection = () => {
                 <h3 className="font-display text-xl md:text-2xl font-bold text-primary-foreground">
                   {t("doctor.name")}
                 </h3>
+                <p className="mt-1 text-primary-foreground/90 text-[10px] md:text-xs leading-relaxed font-medium">
+                  {/* {t("doctor.degrees")} */}
+                </p>
                 <p className="text-primary-foreground/85 text-xs md:text-sm">
                   {t("doctor.position")}
                 </p>
@@ -143,6 +149,9 @@ const DoctorSection = () => {
             <h2 className="hidden lg:block font-display text-3xl md:text-4xl font-bold text-foreground mb-4 leading-tight">
               {t("doctor.heading.prefix")} <span className="text-gradient">{t("doctor.heading.name")}</span>
             </h2>
+            <p className="hidden lg:block -mt-1 mb-4 text-sm md:text-base text-muted-foreground font-medium leading-relaxed max-w-3xl">
+              {t("doctor.degrees")}
+            </p>
             <p className="text-muted-foreground italic mb-5 md:mb-6">
               {t("doctor.subtitle")}
             </p>

@@ -50,8 +50,8 @@ const Footer = () => {
           <div>
             <h4 className="font-display text-lg font-bold text-primary-foreground mb-4">{t("footer.contactTitle")}</h4>
             <div className="space-y-3 text-sm">
-              <a href="tel:7314855000" className="flex items-center gap-2 hover:text-primary-foreground transition-colors">
-                <Phone className="h-4 w-4" /> 731 485 5000
+              <a href="tel:07314855000" className="flex items-center gap-2 hover:text-primary-foreground transition-colors">
+                <Phone className="h-4 w-4" /> 07314855000
               </a>
               <a href="mailto:babygenivf@gmail.com" className="flex items-center gap-2 hover:text-primary-foreground transition-colors">
                 <Mail className="h-4 w-4" /> babygenivf@gmail.com

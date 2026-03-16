@@ -31,7 +31,7 @@ const FloatingCTA = () => {
 
       {/* Call Button */}
       <motion.a
-        href="tel:7314855000"
+        href="tel:07314855000"
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         whileHover={{ scale: 1.1 }}

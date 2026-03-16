@@ -21,7 +21,7 @@ const ThankYou = () => {
 
             <div className="flex flex-wrap items-center justify-center gap-3 md:gap-4 mb-8">
               <a
-                href="tel:7314855000"
+                href="tel:07314855000"
                 className="inline-flex items-center justify-center rounded-xl border border-input px-5 py-3 font-semibold text-foreground hover:bg-accent transition-colors"
               >
                 {t("thankyou.call")}
