@@ -75,12 +75,7 @@ const CertificatesSection = () => {
                 />
                 
                 {/* Hover Overlay */}
-                <div className="absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-6 text-center">
-                  <FileCheck className="text-white mb-3" size={32} />
-                  <p className="text-white font-bold text-sm uppercase tracking-wider">
-                    {cert.title}
-                  </p>
-                </div>
+                <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
             </motion.div>
           ))}
