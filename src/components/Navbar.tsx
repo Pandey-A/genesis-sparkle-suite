@@ -5,7 +5,7 @@ import {
   Menu,
   X
 } from 'lucide-react';
-import logo from '@/assets/Babygen-Logo.webp';
+import logo from '@/assets/babygen-new-updated-logo-17.3.26-removebg-preview.png';
 import { useLanguage } from '@/context/LanguageContext';
 
 const Navbar: React.FC = () => {
@@ -29,20 +29,12 @@ const Navbar: React.FC = () => {
       <nav className="max-w-[1440px] mx-auto px-4 md:px-12 h-24 flex items-center justify-between">
         
         {/* 1. Logo Section */}
-        <div className="flex-shrink-0 flex items-center gap-3">
+        <div className="flex-shrink-0 flex items-center">
           <img 
             src={logo}
             alt="Babygen IVF Centre Logo" 
-            className="h-14 md:h-16 w-auto object-contain"
+            className="h-10 md:h-12 w-auto object-contain"
           />
-          <div className="hidden sm:flex flex-col border-l pl-3 border-gray-200">
-            <span className="text-md font-bold text-[#1A365D] leading-tight">
-              {t("header.hospitalName") || "BABYGEN"}
-            </span>
-            <span className="text-[11px] text-[#D15B8F] font-semibold uppercase tracking-wider">
-              {t("header.location") || "IVF & FERTILITY CENTER"}
-            </span>
-          </div>
         </div>
 
         {/* 2. Desktop Navigation & Phone Pill */}
@@ -117,7 +109,7 @@ const Navbar: React.FC = () => {
         >
           <div className="p-6 flex flex-col h-full">
             <div className="flex justify-between items-center mb-8 border-b pb-4">
-              <img src={logo} alt="Logo" className="h-10 w-auto" />
+              <img src={logo} alt="Logo" className="h-8 w-auto object-contain" />
               <button onClick={() => setIsMenuOpen(false)} className="text-gray-400"><X size={28} /></button>
             </div>
             <ul className="flex flex-col gap-5">
