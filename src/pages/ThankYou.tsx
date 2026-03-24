@@ -27,7 +27,7 @@ const ThankYou = () => {
                 {t("thankyou.call")}
               </a>
               <a
-                href="https://wa.me/917314855000?text=Hello,%20I%20submitted%20a%20consultation%20request.%20Please%20guide%20me%20with%20the%20next%20steps."
+                href="https://wa.me/918839099704?text=Hello,%20I%20submitted%20a%20consultation%20request.%20Please%20guide%20me%20with%20the%20next%20steps."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center rounded-xl gradient-hero text-primary-foreground px-5 py-3 font-semibold hover:opacity-90 transition-opacity"

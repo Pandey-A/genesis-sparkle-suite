@@ -6,6 +6,7 @@ import { useLanguage } from "@/context/LanguageContext";
 const VideoTestimonialsSection = () => {
   const { t } = useLanguage();
   const videoItems = [
+    { id: "WhatsApp_Video_2026-03-24_at_16.55.47_sdl5iz", views: t("videos.views1"), title: t("videos.title1"), treatment: t("videos.treatment1") },
     { id: "Testimonial-3_ri72v3", views: t("videos.views1"), title: t("videos.title1"), treatment: t("videos.treatment1") },
     { id: "Testimonial-6_dyfjjr", views: t("videos.views2"), title: t("videos.title2"), treatment: t("videos.treatment2") },
     { id: "Testimonial-2_e3asbp", views: t("videos.views3"), title: t("videos.title3"), treatment: t("videos.treatment3") },

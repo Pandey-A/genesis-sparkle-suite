@@ -177,7 +177,7 @@ const ContactSection = () => {
             </p>
             <p className="text-primary-foreground/80 text-sm mb-4">{t("common.slotsLeft")}</p>
             <a
-              href="https://wa.me/917314855000?text=Hello,%20I%20would%20like%20to%20book%20an%20appointment"
+              href="https://wa.me/918839099704?text=Hello,%20I%20would%20like%20to%20book%20an%20appointment"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex bg-background text-primary font-semibold px-6 py-2.5 rounded-full text-sm hover:bg-accent transition-colors"
