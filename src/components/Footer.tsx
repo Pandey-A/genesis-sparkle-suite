@@ -1,5 +1,5 @@
 import { Phone, Mail, MapPin, Facebook, Instagram, Youtube } from "lucide-react";
-import babygenLogo from "@/assets/Babygen-Logo.webp";
+import babygenLogo from "@/assets/babygen-new-updated-logo-17.3.26-removebg-preview.png";
 import { useLanguage } from "@/context/LanguageContext";
 
 const Footer = () => {
