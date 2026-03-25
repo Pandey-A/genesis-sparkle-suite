@@ -6,12 +6,36 @@ import { useLanguage } from "@/context/LanguageContext";
 const VideoTestimonialsSection = () => {
   const { t } = useLanguage();
   const videoItems = [
-    { id: "WhatsApp_Video_2026-03-24_at_16.55.47_sdl5iz", views: t("videos.views1"), title: t("videos.title1"), treatment: t("videos.treatment1") },
-    { id: "Testimonial-3_ri72v3", views: t("videos.views1"), title: t("videos.title1"), treatment: t("videos.treatment1") },
-    { id: "Testimonial-6_dyfjjr", views: t("videos.views2"), title: t("videos.title2"), treatment: t("videos.treatment2") },
-    { id: "Testimonial-2_e3asbp", views: t("videos.views3"), title: t("videos.title3"), treatment: t("videos.treatment3") },
-    { id: "Testimonial-1_ffq4ou", views: t("videos.views4"), title: t("videos.title4"), treatment: t("videos.treatment4") },
-    { id: "Testimonial-5_qalsln", views: t("videos.views5"), title: t("videos.title5"), treatment: t("videos.treatment5") },
+    {
+      id: "WhatsApp_Video_2026-03-24_at_16.55.47_sdl5iz",
+      views: t("videos.views1"),
+      title: "A New Beginning Through IVF Care",
+      treatment: "REAL IVF STORY",
+    },
+    {
+      id: "WhatsApp_Video_2026-03-25_at_13.54.34_1_mqjcym",
+      views: t("videos.views2"),
+      title: "15 Years of Waiting, Finally Pregnant with IVF",
+      treatment: "REAL IVF STORY",
+    },
+    {
+      id: "WhatsApp_Video_2026-03-25_at_13.54.35_1_juuioc",
+      views: t("videos.views3"),
+      title: "Conceived Twins in the Very First IVF Attempt",
+      treatment: "REAL IVF STORY",
+    },
+    {
+      id: "WhatsApp_Video_2026-03-25_at_13.54.35_2_mvevst",
+      views: t("videos.views4"),
+      title: "5 Years of Marriage and a Successful IVF Journey",
+      treatment: "REAL IVF STORY",
+    },
+    {
+      id: "WhatsApp_Video_2026-03-25_at_13.54.35_zyszvp",
+      views: t("videos.views5"),
+      title: "From Hope to Happiness: A Heartwarming IVF Success",
+      treatment: "REAL IVF STORY",
+    },
   ];
 
   const scrollRef = useRef<HTMLDivElement | null>(null);
