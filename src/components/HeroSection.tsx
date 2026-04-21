@@ -9,6 +9,7 @@ import {
 import emailjs from '@emailjs/browser';
 import { useLanguage } from '@/context/LanguageContext';
 import { useNavigate } from 'react-router-dom';
+import { createZohoLead } from '@/lib/zoho';
 
 // Assets
 import reception from "@/assets/hospital/babygen-ivf-reception.webp";
@@ -86,7 +87,7 @@ const LandingPage: React.FC = () => {
   const [status, setStatus] = useState("");
   const [statusType, setStatusType] = useState<"success" | "error" | "">("");
 
-  const handleHeroFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleHeroFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!formRef.current) return;
 
@@ -105,22 +106,28 @@ const LandingPage: React.FC = () => {
       date: new Date().toLocaleString(),
     };
 
-    emailjs
-      .send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY)
-      .then(() => {
-        setStatus(t("hero.status.success"));
-        setStatusType("success");
-        formRef.current?.reset();
-        navigate("/thank-you");
-      })
-      .catch((error) => {
-        setStatus(t("hero.status.failed"));
-        setStatusType("error");
-        console.error("EmailJS Error:", error);
-      })
-      .finally(() => {
-        setIsSubmitting(false);
+    try {
+      await createZohoLead({
+        source: "hero",
+        service: String(formData.get("service") || ""),
+        name: String(formData.get("name") || ""),
+        phone: String(formData.get("phone") || ""),
+        email: String(formData.get("email") || ""),
       });
+
+      await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
+
+      setStatus(t("hero.status.success"));
+      setStatusType("success");
+      formRef.current?.reset();
+      navigate("/thank-you");
+    } catch (error) {
+      setStatus(t("hero.status.failed"));
+      setStatusType("error");
+      console.error("Lead submission error:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (

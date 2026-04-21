@@ -5,6 +5,7 @@ import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import emailjs from '@emailjs/browser';
 import { useLanguage } from "@/context/LanguageContext";
+import { createZohoLead } from "@/lib/zoho";
 
 // EmailJS Configuration
 const PUBLIC_KEY = "xtY2ROIREFxFMiKHw";
@@ -39,24 +40,30 @@ const ContactSection = () => {
       date: new Date().toLocaleString(),
     };
 
-    emailjs
-      .send(
+    try {
+      await createZohoLead({
+        source: "contact",
+        service: formData.service,
+        name: formData.name,
+        phone: formData.phone,
+        email: formData.email,
+      });
+
+      await emailjs.send(
         SERVICE_ID,
         TEMPLATE_ID,
         templateParams,
         PUBLIC_KEY
-      )
-      .then(() => {
-        setFormData({ service: "", name: "", email: "", phone: "" });
-        navigate("/thank-you");
-      })
-      .catch((error) => {
-        setSubmitError(t("hero.status.failed"));
-        console.error("EmailJS Error:", error);
-      })
-      .finally(() => {
-        setIsSubmitting(false);
-      });
+      );
+
+      setFormData({ service: "", name: "", email: "", phone: "" });
+      navigate("/thank-you");
+    } catch (error) {
+      setSubmitError(t("hero.status.failed"));
+      console.error("Lead submission error:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (

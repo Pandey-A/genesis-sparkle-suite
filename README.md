@@ -89,6 +89,21 @@ Both lead forms now send enquiry details through EmailJS before redirecting to t
 
 If any EmailJS env value is missing, form submission will fail and users will see an error message on the form.
 
+## Zoho CRM lead setup (Hero + Contact forms)
+
+Both lead forms now also create a lead in Zoho CRM during form submission.
+
+1. Add these values in `.env`:
+	- `VITE_ZOHO_CRM_LEAD_EXECUTE_URL` (your full Zoho function execute URL including apikey params)
+	- `VITE_ZOHO_CRM_COOKIE` (optional cookie header if your Zoho endpoint requires it)
+2. Payload sent to Zoho includes:
+	- `Name`
+	- `Email`
+	- `Phone`
+	- `Description` (includes source form and selected service)
+
+Note: This project is currently frontend-only (Vite). Any `VITE_` variable is exposed in browser builds. For production-grade secret safety, route Zoho calls through a backend endpoint and keep API keys server-side.
+
 ## How can I deploy this project?
 
 Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
