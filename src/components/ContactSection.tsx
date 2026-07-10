@@ -41,6 +41,8 @@ const ContactSection = () => {
     };
 
     try {
+      // Try Zoho silently — don't block EmailJS if it fails
+    try {
       await createZohoLead({
         source: "contact",
         service: formData.service,
@@ -48,15 +50,19 @@ const ContactSection = () => {
         phone: formData.phone,
         email: formData.email,
       });
+    } catch (zohoError) {
+      console.warn("Zoho CRM failed silently:", zohoError);
+    }
 
-      await emailjs.send(
-        SERVICE_ID,
-        TEMPLATE_ID,
-        templateParams,
-        PUBLIC_KEY
-      );
+    // EmailJS always runs regardless of Zoho
+    await emailjs.send(
+      SERVICE_ID,
+      TEMPLATE_ID,
+      templateParams,
+      PUBLIC_KEY
+    );
 
-      setFormData({ service: "", name: "", email: "", phone: "" });
+          setFormData({ service: "", name: "", email: "", phone: "" });
       navigate("/thank-you");
     } catch (error) {
       setSubmitError(t("hero.status.failed"));
