@@ -107,27 +107,32 @@ const LandingPage: React.FC = () => {
     };
 
     try {
-      await createZohoLead({
-        source: "hero",
-        service: String(formData.get("service") || ""),
-        name: String(formData.get("name") || ""),
-        phone: String(formData.get("phone") || ""),
-        email: String(formData.get("email") || ""),
-      });
+  // Try Zoho silently — don't block EmailJS if it fails
+  try {
+    await createZohoLead({
+      source: "hero",
+      service: String(formData.get("service") || ""),
+      name: String(formData.get("name") || ""),
+      phone: String(formData.get("phone") || ""),
+      email: String(formData.get("email") || ""),
+    });
+  } catch (zohoError) {
+    console.warn("Zoho CRM failed silently:", zohoError);
+  }
 
-      await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
+  await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
 
-      setStatus(t("hero.status.success"));
-      setStatusType("success");
-      formRef.current?.reset();
-      navigate("/thank-you");
-    } catch (error) {
-      setStatus(t("hero.status.failed"));
-      setStatusType("error");
-      console.error("Lead submission error:", error);
-    } finally {
-      setIsSubmitting(false);
-    }
+  setStatus(t("hero.status.success"));
+  setStatusType("success");
+  formRef.current?.reset();
+  navigate("/thank-you");
+} catch (error) {
+  setStatus(t("hero.status.failed"));
+  setStatusType("error");
+  console.error("Lead submission error:", error);
+} finally {
+  setIsSubmitting(false);
+}
   };
 
   return (
