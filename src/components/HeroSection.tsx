@@ -104,6 +104,8 @@ const LandingPage: React.FC = () => {
       from_phone: formData.get("phone"),
       service_type: formData.get("service"),
       date: new Date().toLocaleString(),
+      page_url: window.location.href,
+      referrer: document.referrer || "Direct / No referrer",
     };
 
     try {
