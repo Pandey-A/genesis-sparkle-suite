@@ -30,6 +30,8 @@ export const sendLeadEmail = async (payload: LeadEmailPayload) => {
       from_email: payload.email || "N/A",
       phone: payload.phone,
       submitted_at: new Date().toISOString(),
+      page_url: window.location.href,
+      referrer: document.referrer || "Direct / No referrer",
     },
     {
       publicKey,
