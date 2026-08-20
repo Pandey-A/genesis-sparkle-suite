@@ -1,4 +1,4 @@
-export type ZohoLeadPayload = {
+export type BabygenLeadPayload = {
   source: "hero" | "contact";
   service: string;
   name: string;
@@ -6,38 +6,46 @@ export type ZohoLeadPayload = {
   email?: string;
 };
 
-const zohoLeadExecuteUrl = import.meta.env.VITE_ZOHO_CRM_LEAD_EXECUTE_URL;
-const zohoLeadCookie = import.meta.env.VITE_ZOHO_CRM_COOKIE;
+const webhookUrl = import.meta.env.VITE_BABYGEN_CRM_WEBHOOK_URL;
+const webhookKey = import.meta.env.VITE_BABYGEN_CRM_WEBHOOK_KEY;
 
-export const isZohoLeadServiceConfigured = Boolean(zohoLeadExecuteUrl);
+export const isBabygenCrmConfigured = Boolean(webhookUrl) && Boolean(webhookKey);
 
-export const createZohoLead = async (payload: ZohoLeadPayload) => {
-  if (!isZohoLeadServiceConfigured) {
-    throw new Error("Zoho CRM lead endpoint is not configured");
+export const createBabygenLead = async (payload: BabygenLeadPayload) => {
+  if (!isBabygenCrmConfigured) {
+    throw new Error("Babygen CRM webhook is not configured");
   }
 
-  const headers: Record<string, string> = {
-    "Content-Type": "application/json",
-  };
-
-  if (zohoLeadCookie) {
-    headers.Cookie = zohoLeadCookie;
-  }
-
-  const response = await fetch(zohoLeadExecuteUrl as string, {
+  // Content-Type is deliberately "text/plain", not "application/json".
+  // Apps Script web apps don't implement a CORS preflight (OPTIONS)
+  // handler, so a browser fetch with an "application/json" Content-Type
+  // triggers a preflight request that Apps Script can't answer, and the
+  // browser blocks the real POST as a result. "text/plain" keeps this a
+  // CORS "simple request" — no preflight — and the Apps Script side
+  // parses the JSON string out of the raw body regardless of what
+  // Content-Type was declared, so nothing is lost by doing this.
+  const response = await fetch(webhookUrl as string, {
     method: "POST",
-    headers,
+    headers: {
+      "Content-Type": "text/plain;charset=utf-8",
+    },
     body: JSON.stringify({
-      Name: payload.name,
-      Email: payload.email || "",
-      Phone: payload.phone,
-      Description: `Source: ${payload.source}; Service: ${payload.service}`,
+      babygen_key: webhookKey,
+      lead_ref: crypto.randomUUID(),
+      source: payload.source,
+      service: payload.service,
+      name: payload.name,
+      phone: payload.phone,
+      email: payload.email || "",
+      page_url: window.location.href,
+      referrer: document.referrer || "",
+      submitted_at: new Date().toISOString(),
     }),
   });
 
   if (!response.ok) {
     const errorText = await response.text();
-    throw new Error(`Zoho CRM lead creation failed (${response.status}): ${errorText}`);
+    throw new Error(`Babygen CRM lead creation failed (${response.status}): ${errorText}`);
   }
 
   return response;
