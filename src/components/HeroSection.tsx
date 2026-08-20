@@ -9,7 +9,7 @@ import {
 import emailjs from '@emailjs/browser';
 import { useLanguage } from '@/context/LanguageContext';
 import { useNavigate } from 'react-router-dom';
-import { createZohoLead } from '@/lib/zoho';
+import { createBabygenLead } from '@/lib/babygenCrm';
 
 // Assets
 import reception from "@/assets/hospital/babygen-ivf-reception.webp";
@@ -109,17 +109,17 @@ const LandingPage: React.FC = () => {
     };
 
     try {
-  // Try Zoho silently — don't block EmailJS if it fails
+  // Try the CRM silently — don't block EmailJS if it fails
   try {
-    await createZohoLead({
+    await createBabygenLead({
       source: "hero",
       service: String(formData.get("service") || ""),
       name: String(formData.get("name") || ""),
       phone: String(formData.get("phone") || ""),
       email: String(formData.get("email") || ""),
     });
-  } catch (zohoError) {
-    console.warn("Zoho CRM failed silently:", zohoError);
+  } catch (crmError) {
+    console.warn("Babygen CRM lead creation failed silently:", crmError);
   }
 
   await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
